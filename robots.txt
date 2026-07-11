@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arunachalam-gojosaturo.github.io/sitemap.xml
