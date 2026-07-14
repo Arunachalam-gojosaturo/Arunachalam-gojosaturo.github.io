@@ -201,10 +201,30 @@ nav{
 @keyframes spin{to{transform:rotate(360deg);}}
 .portrait-photo{position:absolute;top:12%;left:12%;right:12%;bottom:12%;border-radius:50%;overflow:hidden;border:1px solid var(--line);box-shadow:0 0 0 1px rgba(0,212,255,0.15), 0 0 70px rgba(0,212,255,0.15);}
 .portrait-photo img{width:100%;height:100%;object-fit:cover;display:block;}
-.hud-tag{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;color:var(--cyan);background:rgba(5,9,16,0.9);border:1px solid var(--line);padding:5px 9px;white-space:nowrap;}
-.tag-tl{top:2%;left:-8%;}
-.tag-br{bottom:2%;right:-12%;}
+.hud-tag{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;color:var(--cyan);background:rgba(5,9,16,0.9);border:1px solid var(--line);padding:5px 9px;white-space:nowrap;box-shadow:0 0 10px rgba(0,212,255,0.05);display:flex;align-items:center;}
+.hud-tag::before{content:'';display:inline-block;width:6px;height:6px;background:var(--cyan);border-radius:50%;margin-right:8px;box-shadow:0 0 6px var(--cyan);vertical-align:middle;}
+.tag-tl{top:6%;left:2%;}
+.tag-br{bottom:6%;right:2%;}
 @media(max-width:520px){.tag-tl,.tag-br{display:none;}}
+
+/* ===== CRT SCANLINE EFFECT ===== */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+.term-window, .about-portrait-frame {
+  position: relative;
+  overflow: hidden;
+}
+.term-window::after, .about-portrait-frame::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 100px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 212, 255, 0.03), transparent);
+  animation: scanline 10s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+}
 
 .stat-strip{margin-top:56px;padding-top:28px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:20px;opacity:0;animation:riseIn 0.7s 2.4s forwards;}
 @media(max-width:640px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
@@ -264,6 +284,37 @@ nav{
 .bottom-banner-container{padding-top:20px;padding-bottom:80px;}
 .bottom-banner{width:100%;height:auto;display:block;border:1px solid var(--line);box-shadow:0 30px 80px -30px rgba(0,0,0,0.6);transition:border-color 0.25s, box-shadow 0.25s;}
 .bottom-banner-container:hover .bottom-banner{border-color:var(--cyan);box-shadow:0 0 30px rgba(0,212,255,0.15);}
+
+/* ===== FLOATING HUD BUTTON ===== */
+.hud-btn{
+  position:fixed;bottom:32px;right:32px;
+  width:44px;height:44px;
+  background:rgba(5,9,16,0.85);
+  border:1px solid var(--line);
+  color:var(--cyan);
+  font-family:var(--mono);
+  font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  z-index:90;
+  transition:all 0.25s ease;
+  opacity:0;visibility:hidden;
+  box-shadow:0 0 15px rgba(0,0,0,0.5);
+}
+.hud-btn:hover{
+  border-color:var(--cyan);
+  color:var(--void);
+  background:var(--cyan);
+  box-shadow:0 0 15px rgba(0,212,255,0.3);
+}
+.hud-btn.is-visible{
+  opacity:1;visibility:visible;
+}
+
+/* ===== FOOTER METRICS ===== */
+.footer-metrics{display:flex;justify-content:center;gap:24px;font-family:var(--mono);font-size:10.5px;color:var(--muted-dim);margin-top:14px;text-transform:uppercase;letter-spacing:0.05em;}
+.footer-metrics .status-green{color:var(--ok);text-shadow:0 0 6px var(--ok);}
+@media(max-width:600px){.footer-metrics{flex-direction:column;gap:8px;}}
 .spotlight-body{padding:44px;}
 @media(max-width:640px){.spotlight-body{padding:28px 22px;}}
 .spotlight-tagline{font-family:var(--label);font-weight:600;color:var(--muted);font-size:15px;margin-bottom:26px;max-width:600px;}
@@ -696,6 +747,11 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--cyan);outline-offs
     <div class="wrap">
       <div class="divider" style="margin-bottom:24px;"></div>
       <div class="footer-text">© 2026 Arunachalam M · Vellore, Tamil Nadu · ArcXOS Creator · Built with a terminal, not a template.</div>
+      <div class="footer-metrics">
+        <span>SYS.STATUS: <span class="status-green">ONLINE</span></span>
+        <span>LATENCY: 14ms</span>
+        <span>COORDS: 12.9163° N, 79.1325° E</span>
+      </div>
     </div>
   </footer>
 </main>
@@ -779,7 +835,22 @@ document.addEventListener('scroll', ()=>{
   const y = window.scrollY;
   if(heroRing) heroRing.style.transform = 'translateY(' + (y*0.08) + 'px)';
 },{passive:true});
+
+// scroll to top button behavior
+const scrollBtn = document.getElementById('scrollToTop');
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY > 500){
+    scrollBtn.classList.add('is-visible');
+  } else {
+    scrollBtn.classList.remove('is-visible');
+  }
+},{passive:true});
+scrollBtn.addEventListener('click', ()=>{
+  window.scrollTo({top:0, behavior:'smooth'});
+});
 </script>
+
+<button id="scrollToTop" class="hud-btn" aria-label="Scroll to top">▲</button>
 
 </body>
 </html>
