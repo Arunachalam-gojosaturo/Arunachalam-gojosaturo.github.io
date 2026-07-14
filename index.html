@@ -203,9 +203,8 @@ nav{
 .portrait-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .hud-tag{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;color:var(--cyan);background:rgba(5,9,16,0.9);border:1px solid var(--line);padding:5px 9px;white-space:nowrap;box-shadow:0 0 10px rgba(0,212,255,0.05);display:flex;align-items:center;}
 .hud-tag::before{content:'';display:inline-block;width:6px;height:6px;background:var(--cyan);border-radius:50%;margin-right:8px;box-shadow:0 0 6px var(--cyan);vertical-align:middle;}
-.tag-tl{top:6%;left:2%;}
-.tag-br{bottom:6%;right:2%;}
-@media(max-width:520px){.tag-tl,.tag-br{display:none;}}
+.tag-br{bottom:-20px;left:50%;transform:translateX(-50%);}
+@media(max-width:520px){.tag-br{display:none;}}
 
 /* ===== CRT SCANLINE EFFECT ===== */
 @keyframes scanline {
@@ -444,7 +443,6 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--cyan);outline-offs
         <div class="portrait-photo">
           <img src="assets/portrait-circle.jpg" alt="Arunachalam M — AI systems architect and creator of ArcXOS Linux, digital portrait" width="400" height="400" loading="eager">
         </div>
-        <div class="hud-tag tag-tl">STATUS: ONLINE</div>
         <div class="hud-tag tag-br">ARCXOS // BUILD.SECURE.UNLEASH</div>
       </div>
     </div>
