@@ -14,11 +14,16 @@ Create it on GitHub (public, no README) if it doesn't exist yet.
 ```bash
 git clone https://github.com/Arunachalam-gojosaturo/Arunachalam-gojosaturo.github.io.git
 cd Arunachalam-gojosaturo.github.io
-# copy index.html, robots.txt, sitemap.xml into this folder
+# copy index.html, robots.txt, sitemap.xml, AND the assets/ folder into this repo root
 git add .
-git commit -m "Launch portfolio site"
+git commit -m "Launch portfolio site v2 — ArcXOS spotlight"
 git push origin main
 ```
+
+**Important:** the `assets/` folder (your brand images — hero portrait, ArcXOS
+banner, wide banner) must sit in the same folder as `index.html`, since the
+page references them as relative paths like `assets/portrait-circle.jpg`. If
+you rename or move it, update those `src=` paths in `index.html` to match.
 
 ## 3. Enable Pages
 Repo → **Settings → Pages** → Source: `Deploy from a branch` → Branch: `main` / `root`.
@@ -60,7 +65,28 @@ than starting from zero.
   descriptive `alt` text on the photo (rather than empty or filename-based
   alt) all feed image search and accessibility.
 
-## 6. Optional: custom domain
+## 6. What changed in v2
+- Swapped the GitHub avatar for your own brand portrait (`assets/portrait-circle.jpg`)
+  in the hero, and gave **ArcXOS** — your Arch-based Linux distro — its own
+  dedicated spotlight section using your banner artwork, since it's now your
+  most ambitious build.
+- Reordered the projects grid so **Luna AI** (your actively maintained main
+  project) leads, followed by Luna CLI, Luna WhatsApp Agent, Netwatch, Cyberkit,
+  and the ARC-Network website.
+- New type system: **Orbitron** for headings (matches the ArcXOS logo's
+  geometric sci-fi feel), **Rajdhani** for labels/nav, **Inter** for body
+  copy, **JetBrains Mono** kept for terminal/data text.
+- Added scroll-driven motion: a top scroll-progress bar, fade/rise reveals as
+  each section enters view, animated count-up stats, animated skill bars that
+  fill on scroll, an infinite marquee ticker, active-section nav highlighting,
+  and a subtle parallax drift on the hero's radar rings. All motion respects
+  `prefers-reduced-motion`.
+- Image `alt` text and filenames were written around "ArcXOS", "Arch Linux",
+  and your name specifically, since those are the terms you're already
+  ranking for — this keeps Google Images and text search reinforcing the same
+  identity rather than competing with it.
+
+## 7. Optional: custom domain
 If you buy a domain later, add a `CNAME` file (one line, your domain) to the
 repo root and point your DNS `A`/`ALIAS` records at GitHub Pages per
 [GitHub's custom domain docs](https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site).
