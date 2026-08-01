@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Architecture of Luna AI: Designing a Modular, Self-Healing Autonomous Desktop Agent">
 <meta property="og:description" content="Deep dive into Luna AI's multi-provider failover system, function-calling dispatchers, and state machine architecture built with FastAPI and Python.">
-<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/luna-ai-autonomous-agent-architecture.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Architecture of Luna AI: Designing a Modular, Self-Healing Autonomous Desktop Agent">
 <meta name="twitter:description" content="Deep dive into Luna AI's multi-provider failover system, function-calling dispatchers, and state machine architecture built with FastAPI and Python.">
-<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
   "@type": "BlogPosting",
   "headline": "Architecture of Luna AI: Designing a Modular, Self-Healing Autonomous Desktop Agent",
   "description": "Deep dive into Luna AI's multi-provider failover system, function-calling dispatchers, and state machine architecture built with FastAPI and Python.",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg",
   "datePublished": "2026-08-01",
   "author": {
     "@type": "Person",
@@ -49,6 +50,8 @@
   }
 }
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 
 <style>
 :root{
@@ -125,14 +128,13 @@ h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,38px);line-h
 .article-body th, .article-body td{padding:12px 16px;border:1px solid var(--line);text-align:left;font-size:14.5px;}
 .article-body th{font-family:var(--label);font-weight:700;color:var(--cyan);background:var(--panel-2);}
 
-.author-box{margin-top:60px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
+.author-box{margin-top:40px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
 .author-avatar{width:64px;height:64px;border-radius:50%;border:1px solid var(--cyan);}
 .author-info h4{font-family:var(--disp);font-size:16px;color:var(--text);margin-bottom:4px;}
 .author-info p{font-size:14px;color:var(--muted);margin:0;}
 
 footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted-dim);border-top:1px solid var(--line);padding-top:24px;}
 </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -150,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Architecture of Luna AI: Designing a Modular, Self-Healing Autonomous Desktop Agent</h1>
       <div class="meta">
         <div>DATE: <span>July 28, 2026</span></div>
-        <div>READ TIME: <span>10 min read</span></div>
+        <div>READ TIME: <span>15 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">Deep dive into Luna AI's multi-provider failover system, function-calling dispatchers, and state machine architecture built with FastAPI and Python.</p>
@@ -158,47 +160,99 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
 
     <div class="article-body">
       
-<h2>Introduction</h2>
-<p>Autonomous AI agents often suffer from single-provider rate limits, brittle tool execution, and state loss across restarts. When building <strong>Luna AI</strong>, my goal was to create a modular, privacy-first desktop agent capable of multi-provider LLM failover, asynchronous execution, and persistent memory storage.</p>
+<div style="margin-bottom: 30px;">
+  <img src="../assets/luna_ai_agent_banner.jpg" alt="Luna AI Autonomous Agent Core Architecture Matrix" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+</div>
 
-<h2>1. Multi-Provider Failover Architecture</h2>
-<p>Luna AI features an dynamic provider fallback mechanism. If primary inference via Groq or Anthropic encounters rate limits or network latency above 1500ms, execution seamlessly routes to local Ollama models or secondary cloud endpoints.</p>
-<pre><code>class LLMProviderDispatcher:
-    def __init__(self, providers: list[LLMProvider]):
+<h2>Introduction: The Quest for Reliable AI Agents</h2>
+<p>Most commercial AI assistants are constrained by single-cloud API vendor lock-in, rigid chat UIs, and fragile function calling. When a third-party API rate-limits your key or experiences downtime, your autonomous agent collapses. I built <strong>Luna AI</strong> to solve this foundational reliability problem.</p>
+
+<p>Luna AI is a modular, self-healing desktop AI assistant and agent framework built in Python and FastAPI. It features zero-downtime multi-provider failover (Groq, Ollama, OpenRouter, Anthropic, local models), persistent vector memory, and asynchronous tool execution.</p>
+
+<h2>1. The Multi-Provider Failover Architecture</h2>
+<p>At the heart of Luna AI is an intelligent provider fallback dispatcher. If the primary cloud provider (e.g. Groq Llama-3) returns a 429 Rate Limit error or experiences a high latency threshold (>1200ms), Luna AI instantly reroutes the prompt payload to a local Ollama instance or secondary cloud provider without losing conversation state.</p>
+
+<pre><code># Python LLM Failover Dispatcher in Luna AI Core
+import asyncio
+import logging
+from typing import List, Dict, Any, Optional
+
+logger = logging.getLogger("LunaCore.Dispatcher")
+
+class LLMProvider:
+    def __init__(self, name: str, api_key: str, endpoint: str):
+        self.name = name
+        self.api_key = api_key
+        self.endpoint = endpoint
+
+    async def check_health(%) -> bool:
+        # Pings endpoint to confirm responsiveness
+        return True
+
+    async def generate(self, prompt: str, tools: List[Dict[str, Any]]) -> str:
+        raise NotImplementedError
+
+class LunaDispatcher:
+    def __init__(self, providers: List[LLMProvider]):
         self.providers = providers
 
-    async def generate_response(self, prompt: str, tools: list[dict]) -> AgentResponse:
+    async def execute_query(self, prompt: str, tools: List[Dict[str, Any]]) -> str:
         for provider in self.providers:
             try:
-                if await provider.is_healthy():
-                    return await provider.complete(prompt, tools)
-            except Exception as e:
-                logger.warning(f"Provider {provider.name} failed: {e}. Falling back...")
-        raise AllProvidersFailedError("All LLM backends unreachable.")
+                logger.info(f"Attempting inference via provider: {provider.name}")
+                if await provider.check_health():
+                    response = await asyncio.wait_for(provider.generate(prompt, tools), timeout=5.0)
+                    return response
+            except Exception as exc:
+                logger.warning(f"Provider {provider.name} failed with error: {exc}. Trying fallback...")
+        
+        raise RuntimeError("CRITICAL: All LLM inference providers are currently unreachable.")
 </code></pre>
 
-<h2>2. Async Tool Dispatching & Memory Persistence</h2>
-<p>Luna AI executes tool calls (file manipulation, shell execution, web search) in isolated async subroutines. State is persisted using a hybrid SQLite + FAISS vector database setup, allowing Luna to remember past context across reboots.</p>
+<h2>2. Autonomous Tool Dispatching & Agent Execution Loop</h2>
+<p>Luna AI uses a finite state machine (FSM) loop to handle autonomous tool execution. When Luna determines that an operation requires external input (e.g., reading a file, executing a shell command, checking network traffic), it generates structured tool calls that pass through a sandboxed execution engine.</p>
 
-<h2>3. Conclusion</h2>
-<p>By decoupling the agent logic from specific API vendors, Luna AI provides continuous, zero-downtime execution right inside your terminal and desktop workflow.</p>
+<pre><code># Agent execution state machine loop
+async def agent_loop(user_input: str):
+    context = await memory_store.retrieve_context(user_input)
+    messages = context + [{"role": "user", "content": user_input}]
+    
+    while True:
+        response = await dispatcher.execute_query(messages, available_tools)
+        if response.has_tool_call:
+            tool_name = response.tool_name
+            tool_args = response.tool_args
+            
+            # Execute tool in isolated async task
+            result = await execute_sandboxed_tool(tool_name, tool_args)
+            messages.append({"role": "tool", "name": tool_name, "content": result})
+        else:
+            # Final text response generated
+            await memory_store.save(user_input, response.text)
+            return response.text
+</code></pre>
+
+<h2>3. Local RAG & Vector Memory with FAISS</h2>
+<p>To enable long-term memory across system restarts, Luna AI indexes local developer documentation and conversation logs using local <code>sentence-transformers</code> embeddings coupled with a high-speed <strong>FAISS</strong> (Facebook AI Similarity Search) vector store.</p>
+
+<h2>Conclusion & Open Source Repository</h2>
+<p>Luna AI proves that local, hackable, multi-provider AI desktop agents can outperform monolithic web chatbots in speed, privacy, and reliability. Check out the source code at <a href="https://github.com/Arunachalam-gojosaturo/Luna-ai" target="_blank" rel="noopener">github.com/Arunachalam-gojosaturo/Luna-ai</a>.</p>
 
     </div>
   </article>
 
-  
-<!-- Blog In-Article Ad Unit -->
-<div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-layout="in-article"
-       data-ad-format="fluid"
-       data-ad-client="ca-pub-2389763383510557"
-       data-ad-slot="auto"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
+  <!-- Blog In-Article Ad Unit -->
+  <div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2389763383510557"
+         data-ad-slot="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
   <div class="author-box">
     <img src="https://avatars.githubusercontent.com/u/209762869?v=4" alt="Arunachalam M" class="author-avatar">

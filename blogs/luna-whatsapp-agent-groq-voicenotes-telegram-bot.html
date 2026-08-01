@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes">
 <meta property="og:description" content="How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control channels.">
-<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/luna-whatsapp-agent-groq-voicenotes-telegram-bot.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes">
 <meta name="twitter:description" content="How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control channels.">
-<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
   "@type": "BlogPosting",
   "headline": "Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes",
   "description": "How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control channels.",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg",
   "datePublished": "2026-08-01",
   "author": {
     "@type": "Person",
@@ -49,6 +50,8 @@
   }
 }
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 
 <style>
 :root{
@@ -125,14 +128,13 @@ h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,38px);line-h
 .article-body th, .article-body td{padding:12px 16px;border:1px solid var(--line);text-align:left;font-size:14.5px;}
 .article-body th{font-family:var(--label);font-weight:700;color:var(--cyan);background:var(--panel-2);}
 
-.author-box{margin-top:60px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
+.author-box{margin-top:40px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
 .author-avatar{width:64px;height:64px;border-radius:50%;border:1px solid var(--cyan);}
 .author-info h4{font-family:var(--disp);font-size:16px;color:var(--text);margin-bottom:4px;}
 .author-info p{font-size:14px;color:var(--muted);margin:0;}
 
 footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted-dim);border-top:1px solid var(--line);padding-top:24px;}
 </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -150,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes</h1>
       <div class="meta">
         <div>DATE: <span>July 12, 2026</span></div>
-        <div>READ TIME: <span>9 min read</span></div>
+        <div>READ TIME: <span>11 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control channels.</p>
@@ -158,45 +160,53 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
 
     <div class="article-body">
       
-<h2>Overcoming the Mobile Interface Barrier</h2>
-<p>Having an AI assistant on your desktop is great, but accessing that same intelligence while on the go via messaging apps makes it truly seamless. I created <strong>Luna WhatsApp Agent</strong> to connect my personal AI stack to WhatsApp and Telegram.</p>
+<div style="margin-bottom: 30px;">
+  <img src="../assets/luna_ai_agent_banner.jpg" alt="Luna WhatsApp AI Agent with Groq Engine" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+</div>
 
-<h2>Tech Stack Breakdown</h2>
+<h2>Bringing Autonomous AI to Daily Communication</h2>
+<p>While desktop AI assistants are powerful, accessing your personal AI stack from your mobile device via familiar messaging apps provides unparalleled convenience. <strong>Luna WhatsApp Agent</strong> bridges this gap by connecting Groq LLM inference, OpenAI Whisper voice transcription, and Edge-TTS voice generation directly to WhatsApp and Telegram.</p>
+
+<h2>Technical Stack</h2>
 <ul>
-  <li><strong>Messaging Engine:</strong> <code>whatsapp-web.js</code> running on Node.js.</li>
-  <li><strong>Inference Pipeline:</strong> Groq Llama-3 70B via ultra-low latency REST endpoints (~300ms response generation).</li>
-  <li><strong>Voice Note Support:</strong> OpenAI Whisper for audio transcription and Edge-TTS for realistic voice note replies.</li>
-  <li><strong>Management Interface:</strong> Telegram bot for real-time mode toggles, status checks, and prompt customization.</li>
+  <li><strong>WhatsApp API Client:</strong> <code>whatsapp-web.js</code> running on Node.js.</li>
+  <li><strong>LLM Inference:</strong> Groq Llama-3 70B generating responses in ~300ms.</li>
+  <li><strong>Voice Transcription:</strong> OpenAI Whisper API for converting incoming voice notes into text.</li>
+  <li><strong>Telegram Control Bot:</strong> Management interface for toggling agent personalities and inspecting logs on the fly.</li>
 </ul>
 
-<pre><code>// Message handling loop in Luna WhatsApp Agent
+<pre><code>// Message processing loop in Luna WhatsApp Agent
 client.on('message', async (msg) => {
+    if (msg.fromMe) return;
+    
+    let userPrompt = msg.body;
     if (msg.hasMedia && msg.type === 'audio') {
-        const audioBuffer = await msg.downloadMedia();
-        const transcript = await transcribeAudio(audioBuffer);
-        const reply = await queryGroqLLM(transcript);
-        const voiceNote = await generateVoiceNote(reply);
-        await msg.reply(voiceNote);
+        const media = await msg.downloadMedia();
+        userPrompt = await transcribeVoiceNote(media.data);
     }
+    
+    const aiReply = await queryGroqLLM(userPrompt);
+    await msg.reply(aiReply);
 });
 </code></pre>
+
+<p>Inspect the full code on GitHub: <a href="https://github.com/Arunachalam-gojosaturo/luna-whatsapp-agent" target="_blank" rel="noopener">github.com/Arunachalam-gojosaturo/luna-whatsapp-agent</a>.</p>
 
     </div>
   </article>
 
-  
-<!-- Blog In-Article Ad Unit -->
-<div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-layout="in-article"
-       data-ad-format="fluid"
-       data-ad-client="ca-pub-2389763383510557"
-       data-ad-slot="auto"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
+  <!-- Blog In-Article Ad Unit -->
+  <div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2389763383510557"
+         data-ad-slot="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
   <div class="author-box">
     <img src="https://avatars.githubusercontent.com/u/209762869?v=4" alt="Arunachalam M" class="author-avatar">

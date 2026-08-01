@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Local RAG with FAISS and pgvector: Fast Contextual Memory for AI">
 <meta property="og:description" content="Implementing local semantic memory for desktop AI assistants using sentence-transformers, FAISS indexing, and vector similarity.">
-<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/retrieval-augmented-generation-rag-local-vector-db.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Local RAG with FAISS and pgvector: Fast Contextual Memory for AI">
 <meta name="twitter:description" content="Implementing local semantic memory for desktop AI assistants using sentence-transformers, FAISS indexing, and vector similarity.">
-<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
   "@type": "BlogPosting",
   "headline": "Local RAG with FAISS and pgvector: Fast Contextual Memory for AI",
   "description": "Implementing local semantic memory for desktop AI assistants using sentence-transformers, FAISS indexing, and vector similarity.",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg",
   "datePublished": "2026-08-01",
   "author": {
     "@type": "Person",
@@ -49,6 +50,8 @@
   }
 }
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 
 <style>
 :root{
@@ -125,14 +128,13 @@ h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,38px);line-h
 .article-body th, .article-body td{padding:12px 16px;border:1px solid var(--line);text-align:left;font-size:14.5px;}
 .article-body th{font-family:var(--label);font-weight:700;color:var(--cyan);background:var(--panel-2);}
 
-.author-box{margin-top:60px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
+.author-box{margin-top:40px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
 .author-avatar{width:64px;height:64px;border-radius:50%;border:1px solid var(--cyan);}
 .author-info h4{font-family:var(--disp);font-size:16px;color:var(--text);margin-bottom:4px;}
 .author-info p{font-size:14px;color:var(--muted);margin:0;}
 
 footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted-dim);border-top:1px solid var(--line);padding-top:24px;}
 </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -150,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Local RAG with FAISS and pgvector: Fast Contextual Memory for AI</h1>
       <div class="meta">
         <div>DATE: <span>June 5, 2026</span></div>
-        <div>READ TIME: <span>8 min read</span></div>
+        <div>READ TIME: <span>9 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">Implementing local semantic memory for desktop AI assistants using sentence-transformers, FAISS indexing, and vector similarity.</p>
@@ -158,32 +160,28 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
 
     <div class="article-body">
       
-<h2>Why Local RAG Matters</h2>
-<p>Retrieval-Augmented Generation (RAG) empowers AI models to reference your local files, codebases, and notes without uploading sensitive document data to external cloud indexers.</p>
+<div style="margin-bottom: 30px;">
+  <img src="../assets/luna_ai_agent_banner.jpg" alt="Local RAG Vector Search Memory Pipeline" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+</div>
 
-<h2>The Pipeline</h2>
-<ol>
-  <li><strong>Chunking:</strong> Splitting raw text into semantic chunks of 512 tokens with 50-token overlap.</li>
-  <li><strong>Embedding Generation:</strong> Running local <code>all-MiniLM-L6-v2</code> models via PyTorch to generate 384-dimensional vector embeddings.</li>
-  <li><strong>FAISS Index Search:</strong> Querying the nearest neighbor vectors in < 5ms using Facebook AI Similarity Search (FAISS).</li>
-</ol>
+<h2>Local Vector Memory Architecture</h2>
+<p>Retrieval-Augmented Generation (RAG) allows AI assistants to store, search, and recall context from local developer documents using dense vector embeddings generated via local sentence-transformers.</p>
 
     </div>
   </article>
 
-  
-<!-- Blog In-Article Ad Unit -->
-<div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-layout="in-article"
-       data-ad-format="fluid"
-       data-ad-client="ca-pub-2389763383510557"
-       data-ad-slot="auto"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
+  <!-- Blog In-Article Ad Unit -->
+  <div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2389763383510557"
+         data-ad-slot="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
   <div class="author-box">
     <img src="https://avatars.githubusercontent.com/u/209762869?v=4" alt="Arunachalam M" class="author-avatar">

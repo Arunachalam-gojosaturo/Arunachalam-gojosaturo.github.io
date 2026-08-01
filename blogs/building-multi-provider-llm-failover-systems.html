@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Building Multi-Provider LLM Failover Systems: Groq, Ollama & OpenRouter">
 <meta property="og:description" content="Engineering resilient AI pipelines with fallback hierarchies, automatic prompt retries, and token cost tracking.">
-<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/building-multi-provider-llm-failover-systems.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Building Multi-Provider LLM Failover Systems: Groq, Ollama & OpenRouter">
 <meta name="twitter:description" content="Engineering resilient AI pipelines with fallback hierarchies, automatic prompt retries, and token cost tracking.">
-<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
   "@type": "BlogPosting",
   "headline": "Building Multi-Provider LLM Failover Systems: Groq, Ollama & OpenRouter",
   "description": "Engineering resilient AI pipelines with fallback hierarchies, automatic prompt retries, and token cost tracking.",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg",
   "datePublished": "2026-08-01",
   "author": {
     "@type": "Person",
@@ -49,6 +50,8 @@
   }
 }
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 
 <style>
 :root{
@@ -125,14 +128,13 @@ h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,38px);line-h
 .article-body th, .article-body td{padding:12px 16px;border:1px solid var(--line);text-align:left;font-size:14.5px;}
 .article-body th{font-family:var(--label);font-weight:700;color:var(--cyan);background:var(--panel-2);}
 
-.author-box{margin-top:60px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
+.author-box{margin-top:40px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
 .author-avatar{width:64px;height:64px;border-radius:50%;border:1px solid var(--cyan);}
 .author-info h4{font-family:var(--disp);font-size:16px;color:var(--text);margin-bottom:4px;}
 .author-info p{font-size:14px;color:var(--muted);margin:0;}
 
 footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted-dim);border-top:1px solid var(--line);padding-top:24px;}
 </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -150,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Building Multi-Provider LLM Failover Systems: Groq, Ollama & OpenRouter</h1>
       <div class="meta">
         <div>DATE: <span>June 20, 2026</span></div>
-        <div>READ TIME: <span>7 min read</span></div>
+        <div>READ TIME: <span>9 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">Engineering resilient AI pipelines with fallback hierarchies, automatic prompt retries, and token cost tracking.</p>
@@ -158,32 +160,28 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
 
     <div class="article-body">
       
-<h2>Why Resilience Matters in AI Architecture</h2>
-<p>Relying on a single API endpoint for production AI agents creates a single point of failure. API outages, rate limits (HTTP 429), and transient network errors disrupt user workflows. A robust system requires multi-provider failover routing.</p>
+<div style="margin-bottom: 30px;">
+  <img src="../assets/luna_ai_agent_banner.jpg" alt="Multi-Provider LLM Failover Architecture" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+</div>
 
-<h2>Design Principles</h2>
-<ol>
-  <li><strong>Tiered Fallback Hierarchy:</strong> Direct high-speed API (Groq) -> Aggregator API (OpenRouter) -> Local Offline Model (Ollama).</li>
-  <li><strong>Circuit Breakers:</strong> Temporarily mark a provider as unhealthy if 3 consecutive requests fail, re-testing health after 60 seconds.</li>
-  <li><strong>Token Cost Normalization:</strong> Tracking token consumption dynamically across disparate API provider response schemas.</li>
-</ol>
+<h2>Architecting for High Availability in AI</h2>
+<p>Relying on a single AI cloud API endpoint creates single points of failure. Combining high-speed inference providers (Groq) with local offline fallback options (Ollama) guarantees continuous availability for your AI applications.</p>
 
     </div>
   </article>
 
-  
-<!-- Blog In-Article Ad Unit -->
-<div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-layout="in-article"
-       data-ad-format="fluid"
-       data-ad-client="ca-pub-2389763383510557"
-       data-ad-slot="auto"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
+  <!-- Blog In-Article Ad Unit -->
+  <div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2389763383510557"
+         data-ad-slot="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
   <div class="author-box">
     <img src="https://avatars.githubusercontent.com/u/209762869?v=4" alt="Arunachalam M" class="author-avatar">

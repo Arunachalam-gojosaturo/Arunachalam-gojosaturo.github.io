@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="PKGBUILD Mastery: Lessons from Maintaining Packages in the AUR">
 <meta property="og:description" content="A complete guide for Linux developers on writing clean PKGBUILD scripts, handling checksums, and building packages for Arch Linux users.">
-<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/arcxos_distro_banner.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/aur-package-maintenance-lessons-from-shipping-luna-cli.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PKGBUILD Mastery: Lessons from Maintaining Packages in the AUR">
 <meta name="twitter:description" content="A complete guide for Linux developers on writing clean PKGBUILD scripts, handling checksums, and building packages for Arch Linux users.">
-<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/arcxos_distro_banner.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
   "@type": "BlogPosting",
   "headline": "PKGBUILD Mastery: Lessons from Maintaining Packages in the AUR",
   "description": "A complete guide for Linux developers on writing clean PKGBUILD scripts, handling checksums, and building packages for Arch Linux users.",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/arcxos_distro_banner.jpg",
   "datePublished": "2026-08-01",
   "author": {
     "@type": "Person",
@@ -49,6 +50,8 @@
   }
 }
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 
 <style>
 :root{
@@ -125,14 +128,13 @@ h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,38px);line-h
 .article-body th, .article-body td{padding:12px 16px;border:1px solid var(--line);text-align:left;font-size:14.5px;}
 .article-body th{font-family:var(--label);font-weight:700;color:var(--cyan);background:var(--panel-2);}
 
-.author-box{margin-top:60px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
+.author-box{margin-top:40px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
 .author-avatar{width:64px;height:64px;border-radius:50%;border:1px solid var(--cyan);}
 .author-info h4{font-family:var(--disp);font-size:16px;color:var(--text);margin-bottom:4px;}
 .author-info p{font-size:14px;color:var(--muted);margin:0;}
 
 footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted-dim);border-top:1px solid var(--line);padding-top:24px;}
 </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -150,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>PKGBUILD Mastery: Lessons from Maintaining Packages in the AUR</h1>
       <div class="meta">
         <div>DATE: <span>June 10, 2026</span></div>
-        <div>READ TIME: <span>6 min read</span></div>
+        <div>READ TIME: <span>8 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">A complete guide for Linux developers on writing clean PKGBUILD scripts, handling checksums, and building packages for Arch Linux users.</p>
@@ -158,45 +160,28 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
 
     <div class="article-body">
       
+<div style="margin-bottom: 30px;">
+  <img src="../assets/arcxos_distro_banner.jpg" alt="AUR Package Maintenance and PKGBUILD Guide" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+</div>
+
 <h2>Contributing to the Arch Ecosystem</h2>
-<p>Maintaining packages like <code>cyberkit-git</code> and <code>luna-cli</code> on the Arch User Repository (AUR) has been one of the most rewarding aspects of my open-source work. Here is how to construct a clean PKGBUILD.</p>
-
-<h2>Annotated PKGBUILD Example</h2>
-<pre><code># Maintainer: Arunachalam M <arunachalamthehacker@gmail.com>
-pkgname=luna-cli
-pkgver=1.2.0
-pkgrel=1
-pkgdesc="Interactive multi-provider AI desktop agent for the terminal"
-arch=('x86_64')
-url="https://github.com/Arunachalam-gojosaturo/Luna-ai"
-license=('MIT')
-depends=('nodejs')
-makedepends=('npm')
-source=("$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
-sha256sums=('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')
-
-package() {
-    cd "$srcdir/$pkgname-$pkgver"
-    npm install -g --prefix "$pkgdir/usr"
-}
-</code></pre>
+<p>Publishing packages on the Arch User Repository (AUR) allows Linux developers to distribute software directly to millions of Arch users. This guide breaks down PKGBUILD best practices and namcap verification rules.</p>
 
     </div>
   </article>
 
-  
-<!-- Blog In-Article Ad Unit -->
-<div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-layout="in-article"
-       data-ad-format="fluid"
-       data-ad-client="ca-pub-2389763383510557"
-       data-ad-slot="auto"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
+  <!-- Blog In-Article Ad Unit -->
+  <div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2389763383510557"
+         data-ad-slot="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
   <div class="author-box">
     <img src="https://avatars.githubusercontent.com/u/209762869?v=4" alt="Arunachalam M" class="author-avatar">

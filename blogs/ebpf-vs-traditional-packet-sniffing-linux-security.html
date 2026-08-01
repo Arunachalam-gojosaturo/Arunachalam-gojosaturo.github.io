@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="eBPF vs. Traditional Packet Sniffing: High-Performance Network Security">
 <meta property="og:description" content="Comparing eBPF kernel probes with raw socket packet capture for real-time intrusion prevention on Arch Linux.">
-<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/cybersecurity_netwatch_banner.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/ebpf-vs-traditional-packet-sniffing-linux-security.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="eBPF vs. Traditional Packet Sniffing: High-Performance Network Security">
 <meta name="twitter:description" content="Comparing eBPF kernel probes with raw socket packet capture for real-time intrusion prevention on Arch Linux.">
-<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/hero-banner-wide.jpg">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/cybersecurity_netwatch_banner.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
   "@type": "BlogPosting",
   "headline": "eBPF vs. Traditional Packet Sniffing: High-Performance Network Security",
   "description": "Comparing eBPF kernel probes with raw socket packet capture for real-time intrusion prevention on Arch Linux.",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/cybersecurity_netwatch_banner.jpg",
   "datePublished": "2026-08-01",
   "author": {
     "@type": "Person",
@@ -49,6 +50,8 @@
   }
 }
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 
 <style>
 :root{
@@ -125,14 +128,13 @@ h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,38px);line-h
 .article-body th, .article-body td{padding:12px 16px;border:1px solid var(--line);text-align:left;font-size:14.5px;}
 .article-body th{font-family:var(--label);font-weight:700;color:var(--cyan);background:var(--panel-2);}
 
-.author-box{margin-top:60px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
+.author-box{margin-top:40px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
 .author-avatar{width:64px;height:64px;border-radius:50%;border:1px solid var(--cyan);}
 .author-info h4{font-family:var(--disp);font-size:16px;color:var(--text);margin-bottom:4px;}
 .author-info p{font-size:14px;color:var(--muted);margin:0;}
 
 footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted-dim);border-top:1px solid var(--line);padding-top:24px;}
 </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -150,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>eBPF vs. Traditional Packet Sniffing: High-Performance Network Security</h1>
       <div class="meta">
         <div>DATE: <span>June 25, 2026</span></div>
-        <div>READ TIME: <span>8 min read</span></div>
+        <div>READ TIME: <span>9 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">Comparing eBPF kernel probes with raw socket packet capture for real-time intrusion prevention on Arch Linux.</p>
@@ -158,41 +160,28 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
 
     <div class="article-body">
       
-<h2>Kernel Space vs User Space Security</h2>
-<p>Traditional network monitoring tools capture packets at the socket layer and copy raw data into user space for inspection. At multi-gigabit speeds, this causes substantial CPU context-switching overhead. Extended Berkeley Packet Filters (eBPF) solve this by running sandboxed programs directly inside the Linux kernel.</p>
+<div style="margin-bottom: 30px;">
+  <img src="../assets/cybersecurity_netwatch_banner.jpg" alt="eBPF Kernel Probes vs Raw Packet Sniffing" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+</div>
 
-<h2>Comparative Analysis</h2>
-<table>
-  <thead>
-    <tr><th>Feature</th><th>Raw Sockets (pcap)</th><th>eBPF / XDP</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Processing Location</td><td>User Space</td><td>Kernel Space / NIC</td></tr>
-    <tr><td>CPU Overhead</td><td>Moderate to High</td><td>Ultra Low</td></tr>
-    <tr><td>Packet Drop Speed</td><td>After OS buffer copy</td><td>Before socket allocation (XDP)</td></tr>
-    <tr><td>Kernel Modification</td><td>None</td><td>None (Safe JIT bytecode)</td></tr>
-  </tbody>
-</table>
-
-<h2>Conclusion</h2>
-<p>Modern Linux defensive tools (including next-gen iterations of Netwatch) leverage eBPF to block malicious packets before they consume system resources.</p>
+<h2>The Evolution of Linux Observability</h2>
+<p>Extended Berkeley Packet Filters (eBPF) enable running sandboxed bytecode programs inside the Linux kernel without changing kernel source code. Compared to traditional raw socket packet inspection, eBPF cuts CPU overhead by orders of magnitude.</p>
 
     </div>
   </article>
 
-  
-<!-- Blog In-Article Ad Unit -->
-<div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-layout="in-article"
-       data-ad-format="fluid"
-       data-ad-client="ca-pub-2389763383510557"
-       data-ad-slot="auto"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
+  <!-- Blog In-Article Ad Unit -->
+  <div class="blog-ad-wrapper" style="margin: 32px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 16px;">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2389763383510557"
+         data-ad-slot="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
   <div class="author-box">
     <img src="https://avatars.githubusercontent.com/u/209762869?v=4" alt="Arunachalam M" class="author-avatar">
