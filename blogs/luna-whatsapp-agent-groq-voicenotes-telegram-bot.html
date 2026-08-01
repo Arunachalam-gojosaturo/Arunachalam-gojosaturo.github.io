@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes">
 <meta property="og:description" content="How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control channels.">
-<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_whatsapp_bot_diagram.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/luna-whatsapp-agent-groq-voicenotes-telegram-bot.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes">
 <meta name="twitter:description" content="How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control channels.">
-<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_whatsapp_bot_diagram.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@
   "@type": "BlogPosting",
   "headline": "Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes",
   "description": "How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control channels.",
-  "image": "https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/luna_whatsapp_bot_diagram.jpg",
   "datePublished": "2026-08-01",
   "author": {
     "@type": "Person",
@@ -152,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes</h1>
       <div class="meta">
         <div>DATE: <span>July 12, 2026</span></div>
-        <div>READ TIME: <span>11 min read</span></div>
+        <div>READ TIME: <span>16 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control channels.</p>
@@ -161,36 +161,26 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
     <div class="article-body">
       
 <div style="margin-bottom: 30px;">
-  <img src="../assets/luna_ai_agent_banner.jpg" alt="Luna WhatsApp AI Agent with Groq Engine" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+  <img src="../assets/luna_whatsapp_bot_diagram.jpg" alt="Luna WhatsApp Autonomous AI Agent Interface" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
 </div>
 
-<h2>Bringing Autonomous AI to Daily Communication</h2>
-<p>While desktop AI assistants are powerful, accessing your personal AI stack from your mobile device via familiar messaging apps provides unparalleled convenience. <strong>Luna WhatsApp Agent</strong> bridges this gap by connecting Groq LLM inference, OpenAI Whisper voice transcription, and Edge-TTS voice generation directly to WhatsApp and Telegram.</p>
+<h2>Mobile Autonomous AI Pipeline</h2>
+<p>Bringing AI intelligence directly into messaging platforms allows seamless access on the go. <strong>Luna WhatsApp Agent</strong> connects Groq LLM inference, OpenAI Whisper voice transcription, and Edge-TTS voice generation directly to WhatsApp and Telegram.</p>
 
-<h2>Technical Stack</h2>
-<ul>
-  <li><strong>WhatsApp API Client:</strong> <code>whatsapp-web.js</code> running on Node.js.</li>
-  <li><strong>LLM Inference:</strong> Groq Llama-3 70B generating responses in ~300ms.</li>
-  <li><strong>Voice Transcription:</strong> OpenAI Whisper API for converting incoming voice notes into text.</li>
-  <li><strong>Telegram Control Bot:</strong> Management interface for toggling agent personalities and inspecting logs on the fly.</li>
-</ul>
+<h2>Step 1: WhatsApp Client Integration</h2>
+<pre><code>// Message handling snippet in Node.js
+const { Client, LocalAuth } = require('whatsapp-web.js');
+const client = new Client({ authStrategy: new LocalAuth() });
 
-<pre><code>// Message processing loop in Luna WhatsApp Agent
 client.on('message', async (msg) => {
     if (msg.fromMe) return;
-    
-    let userPrompt = msg.body;
-    if (msg.hasMedia && msg.type === 'audio') {
-        const media = await msg.downloadMedia();
-        userPrompt = await transcribeVoiceNote(media.data);
-    }
-    
-    const aiReply = await queryGroqLLM(userPrompt);
-    await msg.reply(aiReply);
+    const reply = await queryGroq(msg.body);
+    await msg.reply(reply);
 });
+client.initialize();
 </code></pre>
 
-<p>Inspect the full code on GitHub: <a href="https://github.com/Arunachalam-gojosaturo/luna-whatsapp-agent" target="_blank" rel="noopener">github.com/Arunachalam-gojosaturo/luna-whatsapp-agent</a>.</p>
+<p>Source repository on GitHub: <a href="https://github.com/Arunachalam-gojosaturo/luna-whatsapp-agent" target="_blank" rel="noopener">github.com/Arunachalam-gojosaturo/luna-whatsapp-agent</a>.</p>
 
     </div>
   </article>

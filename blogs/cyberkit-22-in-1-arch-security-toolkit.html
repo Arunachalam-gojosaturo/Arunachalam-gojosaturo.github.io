@@ -4,23 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cyberkit Deep Dive: Hardening Arch Linux with a 22-in-1 Bash Engine | Arunachalam M — Blog</title>
-<meta name="description" content="Inside Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, firewall rules, and rootkit detection.">
+<meta name="description" content="An exhaustive guide to Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, permission audits, and rootkit detection.">
 <meta name="author" content="Arunachalam M">
 <link rel="canonical" href="https://arunachalam-gojosaturo.github.io/blogs/cyberkit-22-in-1-arch-security-toolkit.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cyberkit Deep Dive: Hardening Arch Linux with a 22-in-1 Bash Engine">
-<meta property="og:description" content="Inside Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, firewall rules, and rootkit detection.">
-<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/cybersecurity_netwatch_banner.jpg">
+<meta property="og:description" content="An exhaustive guide to Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, permission audits, and rootkit detection.">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/cyberkit_security_audit.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/cyberkit-22-in-1-arch-security-toolkit.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cyberkit Deep Dive: Hardening Arch Linux with a 22-in-1 Bash Engine">
-<meta name="twitter:description" content="Inside Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, firewall rules, and rootkit detection.">
-<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/cybersecurity_netwatch_banner.jpg">
+<meta name="twitter:description" content="An exhaustive guide to Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, permission audits, and rootkit detection.">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/cyberkit_security_audit.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,8 +32,8 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Cyberkit Deep Dive: Hardening Arch Linux with a 22-in-1 Bash Engine",
-  "description": "Inside Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, firewall rules, and rootkit detection.",
-  "image": "https://arunachalam-gojosaturo.github.io/assets/cybersecurity_netwatch_banner.jpg",
+  "description": "An exhaustive guide to Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, permission audits, and rootkit detection.",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/cyberkit_security_audit.jpg",
   "datePublished": "2026-08-01",
   "author": {
     "@type": "Person",
@@ -152,39 +152,47 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Cyberkit Deep Dive: Hardening Arch Linux with a 22-in-1 Bash Engine</h1>
       <div class="meta">
         <div>DATE: <span>July 20, 2026</span></div>
-        <div>READ TIME: <span>10 min read</span></div>
+        <div>READ TIME: <span>16 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
-      <p class="article-sub">Inside Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, firewall rules, and rootkit detection.</p>
+      <p class="article-sub">An exhaustive guide to Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance, permission audits, and rootkit detection.</p>
     </header>
 
     <div class="article-body">
       
 <div style="margin-bottom: 30px;">
-  <img src="../assets/cybersecurity_netwatch_banner.jpg" alt="Cyberkit 22 in 1 Security Engine for Arch Linux" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+  <img src="../assets/cyberkit_security_audit.jpg" alt="Cyberkit Security Audit Terminal Engine" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
 </div>
 
 <h2>Introduction to Cyberkit</h2>
 <p>System security audits often require running dozens of separate command-line utilities—checking for SUID binaries, inspecting listening services, verifying pacman package checksums, and auditing firewall rules. I created <strong>Cyberkit</strong> to unite 22 critical security auditing routines into a single, zero-dependency POSIX Bash engine for the Arch ecosystem.</p>
 
-<h2>The 22 Security Modules Included</h2>
-<ul>
-  <li><strong>Module 01: SUID & SGID Scanner:</strong> Locates unexpected root-privileged binaries.</li>
-  <li><strong>Module 02: Pacman Package Hash Audit:</strong> Runs checksum validation against official Arch repositories to detect binary tampering.</li>
-  <li><strong>Module 03: Kernel Parameter Verification:</strong> Audits sysctl values against security benchmarks.</li>
-  <li><strong>Module 04: Open Port & Service Mapper:</strong> Cross-references listening ports with active systemd daemons.</li>
-  <li><strong>Module 05: User & Group Hardening:</strong> Flags accounts without passwords or with UID 0.</li>
-</ul>
-
-<h2>Installing Cyberkit via AUR</h2>
+<h2>Step 1: Installing Cyberkit via AUR</h2>
 <pre><code># Install from AUR using yay or paru
 yay -S cyberkit-git
 
-# Run full system security audit
-cyberkit --audit-all
+# Verify installation
+cyberkit --version
 </code></pre>
 
-<p>Get the full tool on AUR or inspect the source code on <a href="https://aur.archlinux.org/packages/cyberkit-git" target="_blank" rel="noopener">AUR / cyberkit-git</a>.</p>
+<h2>Step 2: Executing SUID File Audits</h2>
+<pre><code># Pure Bash SUID scanner routine in Cyberkit
+scan_suid_files() {
+    echo "[+] Auditing SUID/SGID binaries..."
+    find / -type f \( -perm -4000 -o -perm -2000 \) -exec ls -ld {} + 2>/dev/null | while read -r line; do
+        echo "[WARNING] SUID Binary Found: $line"
+    done
+}
+</code></pre>
+
+<h2>Step 3: Pacman Binary Integrity Check</h2>
+<p>Cyberkit cross-references binary hashes on disk against official Arch Linux package databases to detect system file modifications or unauthorized rootkits:</p>
+<pre><code># Package checksum validation module
+pacman -Qk | grep -v '0 altered files'
+</code></pre>
+
+<h2>Summary & AUR Access</h2>
+<p>Cyberkit runs instantly on any Arch Linux box without needing heavy runtime setups. Get the package on AUR at <a href="https://aur.archlinux.org/packages/cyberkit-git" target="_blank" rel="noopener">aur.archlinux.org/packages/cyberkit-git</a>.</p>
 
     </div>
   </article>

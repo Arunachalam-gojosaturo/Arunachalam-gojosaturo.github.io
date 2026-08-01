@@ -152,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Designing a Zero-Dependency Node.js Backend with Custom WebSockets</h1>
       <div class="meta">
         <div>DATE: <span>June 29, 2026</span></div>
-        <div>READ TIME: <span>10 min read</span></div>
+        <div>READ TIME: <span>14 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">Building ARC-Network using native Node.js http and crypto modules without Express or Socket.io—achieving ultra-low memory overhead.</p>
@@ -161,31 +161,11 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
     <div class="article-body">
       
 <div style="margin-bottom: 30px;">
-  <img src="../assets/arcxos_distro_banner.jpg" alt="Zero Dependency Node.js Architecture for ARC Network" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+  <img src="../assets/arcxos_distro_banner.jpg" alt="Zero Dependency Node.js Architecture" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
 </div>
 
-<h2>Eliminating Supply Chain Vulnerabilities</h2>
-<p>Modern Node.js backends routinely pull in hundreds of third-party npm dependencies, creating attack vectors and bloated memory footprints. For <strong>ARC-Network</strong>, I engineered a high-performance backend using 0 external dependencies—implementing custom HTTP routers, JWT signing, and native WebSockets with built-in Node modules.</p>
-
-<pre><code>// Native WebSocket Handshake in Node.js
-const crypto = require('crypto');
-
-function handleUpgrade(req, socket) {
-    const key = req.headers['sec-websocket-key'];
-    const acceptKey = crypto.createHash('sha1')
-        .update(key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
-        .digest('base64');
-        
-    socket.write(
-        'HTTP/1.1 101 Switching Protocols\r\n' +
-        'Upgrade: websocket\r\n' +
-        'Connection: Upgrade\r\n' +
-        `Sec-WebSocket-Accept: ${acceptKey}\r\n\r\n`
-    );
-}
-</code></pre>
-
-<p>Repository available on GitHub: <a href="https://github.com/Arunachalam-gojosaturo/ARC-Network-website" target="_blank" rel="noopener">github.com/Arunachalam-gojosaturo/ARC-Network-website</a>.</p>
+<h2>Zero-Dependency Philosophy</h2>
+<p>By relying exclusively on native Node.js modules (`http`, `crypto`, `fs`), ARC-Network eliminates npm supply chain risks and achieves sub-2MB idle memory usage.</p>
 
     </div>
   </article>

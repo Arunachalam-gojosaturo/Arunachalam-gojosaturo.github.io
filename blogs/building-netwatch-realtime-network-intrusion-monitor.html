@@ -152,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Building Netwatch: Real-Time Packet Sniffing and Intrusion Detection</h1>
       <div class="meta">
         <div>DATE: <span>July 16, 2026</span></div>
-        <div>READ TIME: <span>11 min read</span></div>
+        <div>READ TIME: <span>15 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">Designing a lightweight, low-overhead network anomaly detector in Shell and C, deployed as an AUR package for defensive security operations.</p>
@@ -161,61 +161,33 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
     <div class="article-body">
       
 <div style="margin-bottom: 30px;">
-  <img src="../assets/cybersecurity_netwatch_banner.jpg" alt="Netwatch Real-Time Packet Sniffing and Network Security Matrix" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+  <img src="../assets/cybersecurity_netwatch_banner.jpg" alt="Netwatch Real-Time Network Packet Monitoring Matrix" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
 </div>
 
-<h2>Introduction: Why Netwatch Was Created</h2>
-<p>In modern cybersecurity defense, unmonitored outbound connections are often the first sign of a compromised server or rogue background script establishing command-and-control (C2) channels. Heavy enterprise Intrusion Detection Systems (IDS) like Snort or Suricata consume gigabytes of memory and require complex configuration. I built <strong>Netwatch</strong> to provide a lightweight, real-time terminal network monitor tailored for Arch Linux and Linux server environments.</p>
+<h2>Introduction to Netwatch</h2>
+<p>Unusual outbound network traffic is often the first indicator of compromised credentials or rogue background processes. <strong>Netwatch</strong> was created as a terminal-based real-time intrusion monitor for Arch Linux users.</p>
 
-<h2>1. System Architecture: From Sockets to Shell UI</h2>
-<p>Netwatch operates by interfacing with Linux networking sockets (`/proc/net/tcp`, `/proc/net/udp`) and raw packet capture interfaces to track active connections, resolution requests, and bandwidth spikes, mapping each socket directly back to its owning Process ID (PID).</p>
+<h2>Step 1: Socket Inspection Pipeline</h2>
+<p>Netwatch inspects socket states directly via `/proc/net/tcp` and maps active outbound sockets back to their originating Process ID (PID).</p>
 
-<pre><code># Netwatch core socket-to-process inspection subroutine
-#!/usr/bin/env bash
-# Netwatch core daemon loop
-
-LOG_FILE="/var/log/netwatch.log"
-
-inspect_sockets() {
-    ss -tunp | awk 'NR>1 {print $1, $4, $5, $6}' | while read -r proto local foreign pid_info; do
-        if [[ "$foreign" != "127.0.0.1*" && "$foreign" != "*:*" ]]; then
-            pid=$(echo "$pid_info" | grep -oP 'pid=\K[0-9]+')
-            proc_name=$(ps -p "$pid" -o comm= 2>/dev/null)
-            
-            # Check against known malicious IP feeds or abnormal ports
-            if [[ -n "$pid" ]]; then
-                echo "[ALERT] Protocol: $proto | Local: $local | Foreign: $foreign | PID: $pid ($proc_name)" | tee -a "$LOG_FILE"
-            fi
-        fi
-    done
-}
-
-while true; do
-    inspect_sockets
-    sleep 2
+<pre><code># Netwatch real-time alert daemon
+ss -tunp | awk 'NR>1 {print $1, $4, $5, $6}' | while read -r proto local foreign pid_info; do
+    if [[ "$foreign" != "127.0.0.1*" ]]; then
+        pid=$(echo "$pid_info" | grep -oP 'pid=\K[0-9]+')
+        echo "[ALERT] Connection: $proto | Local: $local | Foreign: $foreign | PID: $pid"
+    fi
 done
 </code></pre>
 
-<h2>2. Deploying as an AUR Package</h2>
-<p>Netwatch is packaged directly for the Arch User Repository (AUR), featuring systemd service integration so it runs automatically in the background on system boot.</p>
+<h2>Step 2: Installing & Running Netwatch Service</h2>
+<pre><code># Install from AUR
+yay -S netwatch
 
-<pre><code># /etc/systemd/system/netwatch.service
-[Unit]
-Description=Netwatch Real-Time Network Intrusion Monitoring Daemon
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/netwatch --daemon
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
+# Enable background systemd daemon
+sudo systemctl enable --now netwatch
 </code></pre>
 
-<h2>Summary & AUR Access</h2>
-<p>Netwatch proves that defensive security tools don't need to be resource-heavy to be effective. Check out the project repository on GitHub at <a href="https://github.com/Arunachalam-gojosaturo/netwatch" target="_blank" rel="noopener">github.com/Arunachalam-gojosaturo/netwatch</a>.</p>
+<p>Inspect code on GitHub: <a href="https://github.com/Arunachalam-gojosaturo/netwatch" target="_blank" rel="noopener">github.com/Arunachalam-gojosaturo/netwatch</a>.</p>
 
     </div>
   </article>

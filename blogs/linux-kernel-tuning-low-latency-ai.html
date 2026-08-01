@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Linux Kernel Tuning for Low-Latency Local LLM Inference | Arunachalam M — Blog</title>
-<meta name="description" content="Optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token generation speed.">
+<meta name="description" content="A detailed step-by-step sysctl guide to optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token speed.">
 <meta name="author" content="Arunachalam M">
 <link rel="canonical" href="https://arunachalam-gojosaturo.github.io/blogs/linux-kernel-tuning-low-latency-ai.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux Kernel Tuning for Low-Latency Local LLM Inference">
-<meta property="og:description" content="Optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token generation speed.">
+<meta property="og:description" content="A detailed step-by-step sysctl guide to optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token speed.">
 <meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/arch_linux_kernel_banner.jpg">
 <meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/linux-kernel-tuning-low-latency-ai.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
@@ -19,7 +19,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Linux Kernel Tuning for Low-Latency Local LLM Inference">
-<meta name="twitter:description" content="Optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token generation speed.">
+<meta name="twitter:description" content="A detailed step-by-step sysctl guide to optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token speed.">
 <meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/arch_linux_kernel_banner.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
@@ -32,7 +32,7 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Linux Kernel Tuning for Low-Latency Local LLM Inference",
-  "description": "Optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token generation speed.",
+  "description": "A detailed step-by-step sysctl guide to optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token speed.",
   "image": "https://arunachalam-gojosaturo.github.io/assets/arch_linux_kernel_banner.jpg",
   "datePublished": "2026-08-01",
   "author": {
@@ -152,23 +152,23 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>Linux Kernel Tuning for Low-Latency Local LLM Inference</h1>
       <div class="meta">
         <div>DATE: <span>July 24, 2026</span></div>
-        <div>READ TIME: <span>10 min read</span></div>
+        <div>READ TIME: <span>15 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
-      <p class="article-sub">Optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token generation speed.</p>
+      <p class="article-sub">A detailed step-by-step sysctl guide to optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring parameters for maximum local LLM token speed.</p>
     </header>
 
     <div class="article-body">
       
 <div style="margin-bottom: 30px;">
-  <img src="../assets/arch_linux_kernel_banner.jpg" alt="High Performance Linux Kernel & Local LLM Optimization" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+  <img src="../assets/arch_linux_kernel_banner.jpg" alt="Linux Kernel Processor Core Latency Optimization" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
 </div>
 
-<h2>The Bottleneck in Local AI Inference</h2>
-<p>Running quantized local LLMs (GGUF, EXL2, AWQ) via <code>llama.cpp</code>, <code>Ollama</code>, or <code>vLLM</code> places severe demands on memory bandwidth, CPU cache line alignment, and GPU DMA transfers. Standard Linux distribution defaults are configured for general desktop responsiveness, which causes unnecessary memory page swaps and latency jitter during high-throughput tensor operations.</p>
+<h2>Introduction: The Bottleneck in Local Model Execution</h2>
+<p>Running local quantized models (GGUF, EXL2) via llama.cpp or Ollama places massive demands on memory bus bandwidth, CPU cache alignment, and GPU DMA transfers. Default Linux kernel settings prioritize general desktop battery life and UI responsiveness, causing unexpected page swapping and latency spikes during matrix multiplication tasks.</p>
 
-<h2>1. Transparent Huge Pages (THP) and Memory Locking</h2>
-<p>Loading multi-gigabyte neural network weights into RAM leads to frequent Translation Lookaside Buffer (TLB) misses when using standard 4KB memory pages. Enabling 2MB or 1GB Transparent Huge Pages dramatically reduces TLB overhead during matrix multiplications.</p>
+<h2>Step 1: Enabling Transparent Huge Pages (THP) and Memory Allocations</h2>
+<p>Loading multi-gigabyte neural network weights into RAM leads to frequent Translation Lookaside Buffer (TLB) misses when using standard 4KB memory pages. Enabling 2MB or 1GB Transparent Huge Pages dramatically speeds up matrix lookups.</p>
 
 <pre><code># Enable Transparent Huge Pages dynamically
 echo always | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
@@ -178,37 +178,38 @@ echo advise | sudo tee /sys/kernel/mm/transparent_hugepage/defrag
 sudo sysctl -w vm.nr_hugepages=2048
 </code></pre>
 
-<h3>Preventing Memory Swapping with <code>mlock</code></h3>
-<p>Ensure that model weights held in RAM are never swapped to disk by adjusting <code>limits.conf</code> and passing <code>--mlock</code> to llama.cpp:</p>
-<pre><code># Add to /etc/security/limits.conf for user arunachalam
+<h2>Step 2: Configuring Memory Locking via <code>limits.conf</code></h2>
+<p>Ensure that model weights held in system memory are never swapped out to disk by configuring `limits.conf` and passing `--mlock` to llama.cpp:</p>
+
+<pre><code># Add to /etc/security/limits.conf
 arunachalam    soft    memlock    unlimited
 arunachalam    hard    memlock    unlimited
 </code></pre>
 
-<h2>2. CPU Performance Scaling and NUMA Alignment</h2>
-<p>Dynamic CPU frequency scaling causes latency spikes when the governor transitions between low-power states and active inference spikes. Locking CPU cores into performance mode stabilizes token generation rates.</p>
+<h2>Step 3: Setting CPU Governors to High-Performance Mode</h2>
+<p>Prevent latency jitter caused by CPU dynamic frequency scaling by locking all CPU cores to maximum clock speeds during active inference workloads:</p>
 
-<pre><code># Set all CPU cores to performance governor
+<pre><code># Set CPU scaling governor to performance across all logical cores
 sudo cpupower frequency-set -g performance
 
-# Verify core frequencies across all logical cores
+# Monitor real-time CPU frequencies
 watch -n 1 "grep 'cpu MHz' /proc/cpuinfo"
 </code></pre>
 
-<h2>3. Benchmark Comparison</h2>
+<h2>Step 4: Benchmarks Before & After Optimization</h2>
 <table>
   <thead>
     <tr><th>Configuration</th><th>Tokens/Sec (Llama-3 8B)</th><th>First Token Latency (TTFT)</th></tr>
   </thead>
   <tbody>
-    <tr><td>Default Linux Kernel Defaults</td><td>28.4 t/s</td><td>420 ms</td></tr>
-    <tr><td>With THP + Memory Locking</td><td>33.8 t/s</td><td>310 ms</td></tr>
-    <tr><td>With THP + Performance Governor + CPU Pinning</td><td>38.2 t/s</td><td>240 ms</td></tr>
+    <tr><td>Default Linux Kernel</td><td>28.4 t/s</td><td>420 ms</td></tr>
+    <tr><td>THP + Memory Locking Enabled</td><td>33.8 t/s</td><td>310 ms</td></tr>
+    <tr><td>THP + Performance Governor + Core Pinning</td><td><strong>38.2 t/s</strong></td><td><strong>240 ms</strong></td></tr>
   </tbody>
 </table>
 
-<h2>Summary</h2>
-<p>Fine-tuning kernel parameters transforms a standard Linux box into a high-speed local inference workstation. Try applying these sysctl parameters to your own Arch setup for instant speed gains!</p>
+<h2>Conclusion</h2>
+<p>Fine-tuning Linux sysctl parameters unlocks maximum GPU and CPU performance for local AI pipelines. Try these sysctl commands on your workstation today!</p>
 
     </div>
   </article>
