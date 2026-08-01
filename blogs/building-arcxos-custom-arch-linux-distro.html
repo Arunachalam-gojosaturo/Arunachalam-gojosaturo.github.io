@@ -34,7 +34,7 @@
   "headline": "How I Built ArcXOS: Designing a Security-Focused Arch Linux Distro Step-by-Step",
   "description": "An exhaustive, step-by-step masterclass on creating ArcXOS using archiso, custom PKGBUILD repositories, kernel self-protection scripts, systemd unit hooks, and dotfiles environment.",
   "image": "https://arunachalam-gojosaturo.github.io/assets/arcxos_distro_banner.jpg",
-  "datePublished": "2026-08-01",
+  "datePublished": "2026-08-02",
   "author": {
     "@type": "Person",
     "name": "Arunachalam M",
@@ -152,7 +152,7 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
       <h1>How I Built ArcXOS: Designing a Security-Focused Arch Linux Distro Step-by-Step</h1>
       <div class="meta">
         <div>DATE: <span>August 1, 2026</span></div>
-        <div>READ TIME: <span>18 min read</span></div>
+        <div>READ TIME: <span>22 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
       <p class="article-sub">An exhaustive, step-by-step masterclass on creating ArcXOS using archiso, custom PKGBUILD repositories, kernel self-protection scripts, systemd unit hooks, and dotfiles environment.</p>
@@ -165,13 +165,11 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
 </div>
 
 <h2>Introduction: Why Build a Custom Arch Linux Distribution?</h2>
-<p>As an Arch Linux developer and system builder based in Vellore, Tamil Nadu, I’ve long admired Arch's minimalist, rolling-release architecture and total transparency. However, configuring a fresh Arch installation optimized for cybersecurity auditing, penetration testing, and AI infrastructure development manually takes hours of package selection, systemd configuration, kernel parameter tuning, and dotfile deployment.</p>
+<p>As an Arch Linux developer and system administrator based in Vellore, Tamil Nadu, I’ve long admired Arch's minimalist, rolling-release architecture and total transparency. However, configuring a fresh Arch installation optimized for cybersecurity auditing, penetration testing, and AI infrastructure development manually takes hours of package selection, systemd configuration, kernel parameter tuning, and dotfile deployment.</p>
+<p>I engineered <strong>ArcXOS</strong> to eliminate this initial friction while preserving the raw power of Arch. ArcXOS is not a heavy desktop spin; it is a security-hardened, developer-first Arch Linux derivative pre-configured with defensive tools, kernel-level optimizations, custom PKGBUILD repositories, and modern Wayland ergonomics out of the box.</p>
 
-<p>I engineered <strong>ArcXOS</strong> to solve this exact bottleneck. ArcXOS is not a heavy, bloated desktop spin; it is a security-hardened, developer-first Arch Linux derivative pre-configured with defensive tools, kernel-level optimizations, custom PKGBUILD repositories, and modern Wayland ergonomics out of the box.</p>
-
-<h2>Step 1: Setting Up the Archiso Environment</h2>
-<p>ArcXOS is built using the official <code>archiso</code> toolchain. To begin building a custom ISO, install the necessary package dependencies on an Arch workstation:</p>
-
+<h2>Step 1: Setting Up the Archiso Build Environment</h2>
+<p>ArcXOS is compiled using the official <code>archiso</code> toolchain. To begin building a custom ISO, install the necessary package dependencies on an Arch workstation:</p>
 <pre><code># Install archiso and compression dependencies
 sudo pacman -S --needed archiso mkinitcpio squashfs-tools devtools git
 
@@ -182,7 +180,6 @@ cp -r /usr/share/archiso/configs/releng/* .
 
 <h2>Step 2: Defining ISO Profile Metadata in <code>profiledef.sh</code></h2>
 <p>The <code>profiledef.sh</code> script specifies the ISO branding, bootloader capabilities, filesystem compression format, and root file permissions:</p>
-
 <pre><code>#!/usr/bin/env bash
 # ArcXOS Build Profile Definition
 iso_name="ArcXOS"
@@ -208,7 +205,6 @@ file_permissions=(
 
 <h2>Step 3: Custom Package Selection & Local Pacman Repositories</h2>
 <p>ArcXOS includes core security utilities alongside the <code>linux-zen</code> low-latency kernel. Edit <code>packages.x86_64</code> to declare installed software:</p>
-
 <pre><code># Base & Kernel
 base
 base-devel
@@ -242,7 +238,6 @@ git
 
 <h2>Step 4: Kernel Self-Protection & Hardening Parameters</h2>
 <p>ArcXOS enforces strict kernel parameters applied at boot via <code>airootfs/etc/sysctl.d/99-arcxos-security.conf</code>:</p>
-
 <pre><code># Disable dmesg logging for unprivileged users
 kernel.dmesg_restrict = 1
 
@@ -266,7 +261,6 @@ kernel.randomize_va_space = 2
 
 <h2>Step 5: Compiling & ISO Output Generation</h2>
 <p>Execute the root build script to compile the SquashFS image and create the final bootable ISO file:</p>
-
 <pre><code># Build ArcXOS ISO with verbose output
 sudo mkarchiso -v -w /tmp/archiso-tmp -o ~/iso-output ~/arcxos-iso
 
@@ -299,15 +293,14 @@ ls -lh ~/iso-output/ArcXOS-2026.08.01-x86_64.iso
     </div>
   </article>
 
-  <!-- Blog In-Article Ad Unit -->
   <!-- Blog In-Article Ad -->
 <div class="blog-ad-wrapper" style="margin: 36px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 18px;">
   <ins class="adsbygoogle"
-       style="display:block"
+       style="display:block; text-align:center;"
+       data-ad-layout="in-article"
+       data-ad-format="fluid"
        data-ad-client="ca-pub-2389763383510557"
-       data-ad-slot="1167982671"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
+       data-ad-slot="1167982671"></ins>
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>

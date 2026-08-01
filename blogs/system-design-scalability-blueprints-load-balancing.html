@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Design Masterclass: Distributed Scalability, Load Balancing, and Sharding | Arunachalam M — Blog</title>
+<meta name="description" content="An architecture blueprint for high-throughput system design interviews: load balancing algorithms, database sharding, Redis caching strategies, and CAP theorem.">
+<meta name="author" content="Arunachalam M">
+<link rel="canonical" href="https://arunachalam-gojosaturo.github.io/blogs/system-design-scalability-blueprints-load-balancing.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="System Design Masterclass: Distributed Scalability, Load Balancing, and Sharding">
+<meta property="og:description" content="An architecture blueprint for high-throughput system design interviews: load balancing algorithms, database sharding, Redis caching strategies, and CAP theorem.">
+<meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/system_design_scalability.jpg">
+<meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/system-design-scalability-blueprints-load-balancing.html">
+<meta property="og:site_name" content="Arunachalam M — Tech Blog">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="System Design Masterclass: Distributed Scalability, Load Balancing, and Sharding">
+<meta name="twitter:description" content="An architecture blueprint for high-throughput system design interviews: load balancing algorithms, database sharding, Redis caching strategies, and CAP theorem.">
+<meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/system_design_scalability.jpg">
+
+<link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "System Design Masterclass: Distributed Scalability, Load Balancing, and Sharding",
+  "description": "An architecture blueprint for high-throughput system design interviews: load balancing algorithms, database sharding, Redis caching strategies, and CAP theorem.",
+  "image": "https://arunachalam-gojosaturo.github.io/assets/system_design_scalability.jpg",
+  "datePublished": "2026-08-02",
+  "author": {
+    "@type": "Person",
+    "name": "Arunachalam M",
+    "url": "https://arunachalam-gojosaturo.github.io/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Arunachalam M"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://arunachalam-gojosaturo.github.io/blogs/system-design-scalability-blueprints-load-balancing.html"
+  }
+}
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2389763383510557" crossorigin="anonymous"></script>
+
+<style>
+:root{
+  --void:#050910;
+  --panel:#0a121d;
+  --panel-2:#0e1826;
+  --line:#1b2a3d;
+  --cyan:#00d4ff;
+  --blue:#3b82f6;
+  --amber:#ff8a00;
+  --text:#eaf3fb;
+  --muted:#7f93a8;
+  --muted-dim:#3c4d5f;
+  --ok:#00ff9d;
+  --disp:'Orbitron', sans-serif;
+  --label:'Rajdhani', sans-serif;
+  --body:'Inter', sans-serif;
+  --mono:'JetBrains Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--void);
+  color:var(--text);
+  font-family:var(--body);
+  line-height:1.75;
+  padding-top:90px;
+  padding-bottom:60px;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(circle at 15% 8%, rgba(59,130,246,0.10), transparent 40%),
+    radial-gradient(circle at 85% 92%, rgba(0,212,255,0.08), transparent 45%),
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size:auto, auto, 44px 44px, 44px 44px;
+  pointer-events:none;
+  z-index:1;
+}
+a{color:var(--cyan);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  border-bottom:1px solid var(--line);
+  background:rgba(5,9,16,0.85);
+  backdrop-filter:blur(12px);
+}
+.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;height:66px;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--text);display:flex;align-items:center;gap:10px;}
+.back-btn{font-family:var(--label);font-weight:700;font-size:14px;color:var(--cyan);border:1px solid var(--cyan);padding:7px 16px;transition:all 0.2s;}
+.back-btn:hover{background:var(--cyan);color:var(--void);text-decoration:none;}
+
+.wrap{max-width:840px;margin:0 auto;padding:40px 24px;position:relative;z-index:3;}
+.article-header{margin-bottom:40px;border-bottom:1px solid var(--line);padding-bottom:30px;}
+.tag{font-family:var(--label);font-weight:700;font-size:13px;letter-spacing:0.12em;color:var(--amber);background:rgba(255,138,0,0.1);border:1px solid rgba(255,138,0,0.3);padding:4px 10px;display:inline-block;margin-bottom:16px;text-transform:uppercase;}
+.meta{font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:18px;display:flex;gap:18px;}
+.meta span{color:var(--text);}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,38px);line-height:1.2;margin-bottom:20px;text-transform:uppercase;color:var(--text);}
+.article-sub{font-size:18px;color:var(--muted);line-height:1.6;font-weight:400;}
+
+.article-body{font-size:16.5px;color:#d0e2f2;}
+.article-body h2{font-family:var(--disp);font-size:22px;color:var(--cyan);margin:36px 0 16px;border-bottom:1px solid var(--line);padding-bottom:8px;}
+.article-body h3{font-family:var(--label);font-size:19px;color:var(--text);margin:24px 0 12px;font-weight:700;}
+.article-body p{margin-bottom:20px;}
+.article-body ul, .article-body ol{margin:0 0 24px 24px;}
+.article-body li{margin-bottom:8px;}
+.article-body code{font-family:var(--mono);background:var(--panel-2);color:var(--cyan);padding:3px 7px;font-size:14px;border:1px solid var(--line);}
+.article-body pre{background:var(--panel);border:1px solid var(--line);padding:20px;overflow-x:auto;margin:24px 0;border-left:3px solid var(--cyan);}
+.article-body pre code{background:none;border:none;padding:0;color:var(--text);}
+.article-body table{width:100%;border-collapse:collapse;margin:24px 0;background:var(--panel);border:1px solid var(--line);}
+.article-body th, .article-body td{padding:12px 16px;border:1px solid var(--line);text-align:left;font-size:14.5px;}
+.article-body th{font-family:var(--label);font-weight:700;color:var(--cyan);background:var(--panel-2);}
+
+.author-box{margin-top:40px;padding:28px;background:var(--panel);border:1px solid var(--line);display:flex;gap:20px;align-items:center;}
+.author-avatar{width:64px;height:64px;border-radius:50%;border:1px solid var(--cyan);}
+.author-info h4{font-family:var(--disp);font-size:16px;color:var(--text);margin-bottom:4px;}
+.author-info p{font-size:14px;color:var(--muted);margin:0;}
+
+footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted-dim);border-top:1px solid var(--line);padding-top:24px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="brand">⚡ ARUNACHALAM M</a>
+    <a href="../index.html#blog" class="back-btn">← Back to Portfolio</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <article>
+    <header class="article-header">
+      <span class="tag">SYSTEM DESIGN</span>
+      <h1>System Design Masterclass: Distributed Scalability, Load Balancing, and Sharding</h1>
+      <div class="meta">
+        <div>DATE: <span>August 2, 2026</span></div>
+        <div>READ TIME: <span>25 min read</span></div>
+        <div>AUTHOR: <span>Arunachalam M</span></div>
+      </div>
+      <p class="article-sub">An architecture blueprint for high-throughput system design interviews: load balancing algorithms, database sharding, Redis caching strategies, and CAP theorem.</p>
+    </header>
+
+    <div class="article-body">
+      
+<div style="margin-bottom: 30px;">
+  <img src="../assets/system_design_scalability.jpg" alt="System Scalability Architecture and Load Balancing Matrix" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+</div>
+
+<h2>Introduction to High-Scale System Design</h2>
+<p>Designing software systems that scale to millions of concurrent users requires understanding distributed systems trade-offs—balancing throughput, latency, consistency, and fault tolerance. This masterclass covers the key building blocks used in FAANG-level system design interviews.</p>
+
+<h2>1. Load Balancing Strategies</h2>
+<p>Load balancers distribute incoming traffic across application servers. Common algorithms include Round Robin, Least Connections, and Consistent Hashing:</p>
+
+<pre><code># Consistent Hashing Node Resolver Pseudocode
+import hashlib
+
+class ConsistentHashRing:
+    def __init__(self, nodes=None, replicas=3):
+        self.replicas = replicas
+        self.ring = {}
+        self.sorted_keys = []
+        if nodes:
+            for node in nodes:
+                self.add_node(node)
+
+    def _hash(self, key: str) -> int:
+        return int(hashlib.md5(key.encode('utf-8')).hexdigest(), 16)
+
+    def add_node(self, node: str):
+        for i in range(self.replicas):
+            key = self._hash(f"{node}:{i}")
+            self.ring[key] = node
+            self.sorted_keys.append(key)
+        self.sorted_keys.sort()
+
+    def get_node(self, key: str) -> str:
+        if not self.ring:
+            return None
+        h = self._hash(key)
+        for k in self.sorted_keys:
+            if h <= k:
+                return self.ring[k]
+        return self.ring[self.sorted_keys[0]]
+</code></pre>
+
+<h2>2. Database Sharding & Read-Replicas</h2>
+<p>When single relational databases hit CPU and IOPS write limits, horizontal sharding distributes records across isolated database partitions:</p>
+
+<table>
+  <thead>
+    <tr><th>Technique</th><th>Mechanism</th><th>Best Used For</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Read-Replicas</td><td>Primary Write DB -> Multiple Secondary Read DBs</td><td>Read-heavy workloads (90% read / 10% write)</td></tr>
+    <tr><td>Horizontal Sharding</td><td>Hash-based Partitioning (`user_id % num_shards`)</td><td>High write volume datasets</td></tr>
+    <tr><td>Caching (Redis)</td><td>In-memory Key-Value Cache (LRU Eviction)</td><td>Ultra-low latency data retrieval (&lt;2ms)</td></tr>
+  </tbody>
+</table>
+
+<h2>3. The CAP Theorem Trade-Off</h2>
+<p>In distributed storage, you can only pick two: **Consistency**, **Availability**, or **Partition Tolerance**.</p>
+
+    </div>
+  </article>
+
+  <!-- Blog In-Article Ad -->
+<div class="blog-ad-wrapper" style="margin: 36px 0; text-align: center; overflow: hidden; background: var(--panel); border: 1px dashed var(--line); padding: 18px;">
+  <ins class="adsbygoogle"
+       style="display:block; text-align:center;"
+       data-ad-layout="in-article"
+       data-ad-format="fluid"
+       data-ad-client="ca-pub-2389763383510557"
+       data-ad-slot="1167982671"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+  <div class="author-box">
+    <img src="https://avatars.githubusercontent.com/u/209762869?v=4" alt="Arunachalam M" class="author-avatar">
+    <div class="author-info">
+      <h4>Written by Arunachalam M</h4>
+      <p>Arch Linux developer, AI systems architect, and creator of ArcXOS & Luna AI based in Vellore, Tamil Nadu.</p>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Arunachalam M · ArcXOS Creator · Published on <a href="https://arunachalam-gojosaturo.github.io/">arunachalam-gojosaturo.github.io</a>
+  </footer>
+</main>
+
+</body>
+</html>

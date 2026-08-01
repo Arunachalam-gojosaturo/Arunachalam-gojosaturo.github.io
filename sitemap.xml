@@ -7,67 +7,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/building-arcxos-custom-arch-linux-distro.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/luna-ai-autonomous-agent-architecture.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/linux-kernel-tuning-low-latency-ai.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/cyberkit-22-in-1-arch-security-toolkit.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/building-netwatch-realtime-network-intrusion-monitor.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/luna-whatsapp-agent-groq-voicenotes-telegram-bot.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/why-arch-linux-is-the-ultimate-os-for-ai-engineers.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/luna-cli-bringing-autonomous-agents-to-terminal.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/zero-dependency-node-backend-arc-network.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/ebpf-vs-traditional-packet-sniffing-linux-security.html</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arunachalam-gojosaturo.github.io/blogs/building-multi-provider-llm-failover-systems.html</loc>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/nlp-text-sentiment-speech-recognition-whisper.html</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -79,7 +19,55 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/luna-cli-bringing-autonomous-agents-to-terminal.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/generative-ai-llm-prompt-fine-tuning-guide.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/cyberkit-22-in-1-arch-security-toolkit.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/gcp-cloud-infrastructure-core-mechanics.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://arunachalam-gojosaturo.github.io/blogs/aur-package-maintenance-lessons-from-shipping-luna-cli.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/ransomware-defense-threat-intelligence-shielding.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/ebpf-vs-traditional-packet-sniffing-linux-security.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/zero-trust-architecture-security-guide.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/building-netwatch-realtime-network-intrusion-monitor.html</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -91,7 +79,73 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/linux-kernel-tuning-low-latency-ai.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/system-design-scalability-blueprints-load-balancing.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/zero-dependency-node-backend-arc-network.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/dsa-data-structures-algorithms-interview-mastery.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/luna-ai-autonomous-agent-architecture.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://arunachalam-gojosaturo.github.io/blogs/the-future-of-autonomous-ai-agents-on-linux.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/kubernetes-docker-containerization-orchestration.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/building-multi-provider-llm-failover-systems.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/why-arch-linux-is-the-ultimate-os-for-ai-engineers.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/luna-whatsapp-agent-groq-voicenotes-telegram-bot.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/serverless-computing-faas-execution-models.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arunachalam-gojosaturo.github.io/blogs/building-arcxos-custom-arch-linux-distro.html</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

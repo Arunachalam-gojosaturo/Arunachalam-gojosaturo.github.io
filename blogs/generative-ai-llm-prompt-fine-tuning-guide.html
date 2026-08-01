@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Architecture of Luna AI: Building a Self-Healing Multi-Provider AI Agent | Arunachalam M — Blog</title>
-<meta name="description" content="An in-depth step-by-step guide to building Luna AI's multi-provider failover routing, async tool execution loop, state machine architecture, and FAISS vector memory.">
+<title>Generative AI & LLMs: Prompt Engineering, Fine-Tuning, and Enterprise Automation | Arunachalam M — Blog</title>
+<meta name="description" content="A comprehensive guide to prompt engineering patterns, LoRA/QLoRA model fine-tuning with Hugging Face, and automating real-world business workflows.">
 <meta name="author" content="Arunachalam M">
-<link rel="canonical" href="https://arunachalam-gojosaturo.github.io/blogs/luna-ai-autonomous-agent-architecture.html">
+<link rel="canonical" href="https://arunachalam-gojosaturo.github.io/blogs/generative-ai-llm-prompt-fine-tuning-guide.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
-<meta property="og:title" content="Architecture of Luna AI: Building a Self-Healing Multi-Provider AI Agent">
-<meta property="og:description" content="An in-depth step-by-step guide to building Luna AI's multi-provider failover routing, async tool execution loop, state machine architecture, and FAISS vector memory.">
+<meta property="og:title" content="Generative AI & LLMs: Prompt Engineering, Fine-Tuning, and Enterprise Automation">
+<meta property="og:description" content="A comprehensive guide to prompt engineering patterns, LoRA/QLoRA model fine-tuning with Hugging Face, and automating real-world business workflows.">
 <meta property="og:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
-<meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/luna-ai-autonomous-agent-architecture.html">
+<meta property="og:url" content="https://arunachalam-gojosaturo.github.io/blogs/generative-ai-llm-prompt-fine-tuning-guide.html">
 <meta property="og:site_name" content="Arunachalam M — Tech Blog">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Architecture of Luna AI: Building a Self-Healing Multi-Provider AI Agent">
-<meta name="twitter:description" content="An in-depth step-by-step guide to building Luna AI's multi-provider failover routing, async tool execution loop, state machine architecture, and FAISS vector memory.">
+<meta name="twitter:title" content="Generative AI & LLMs: Prompt Engineering, Fine-Tuning, and Enterprise Automation">
+<meta name="twitter:description" content="A comprehensive guide to prompt engineering patterns, LoRA/QLoRA model fine-tuning with Hugging Face, and automating real-world business workflows.">
 <meta name="twitter:image" content="https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg">
 
 <link rel="icon" href="https://avatars.githubusercontent.com/u/209762869?v=4">
@@ -31,8 +31,8 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Architecture of Luna AI: Building a Self-Healing Multi-Provider AI Agent",
-  "description": "An in-depth step-by-step guide to building Luna AI's multi-provider failover routing, async tool execution loop, state machine architecture, and FAISS vector memory.",
+  "headline": "Generative AI & LLMs: Prompt Engineering, Fine-Tuning, and Enterprise Automation",
+  "description": "A comprehensive guide to prompt engineering patterns, LoRA/QLoRA model fine-tuning with Hugging Face, and automating real-world business workflows.",
   "image": "https://arunachalam-gojosaturo.github.io/assets/luna_ai_agent_banner.jpg",
   "datePublished": "2026-08-02",
   "author": {
@@ -46,7 +46,7 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://arunachalam-gojosaturo.github.io/blogs/luna-ai-autonomous-agent-architecture.html"
+    "@id": "https://arunachalam-gojosaturo.github.io/blogs/generative-ai-llm-prompt-fine-tuning-guide.html"
   }
 }
 </script>
@@ -149,131 +149,83 @@ footer{margin-top:60px;text-align:center;font-family:var(--mono);font-size:12px;
   <article>
     <header class="article-header">
       <span class="tag">AI & AGENTS</span>
-      <h1>Architecture of Luna AI: Building a Self-Healing Multi-Provider AI Agent</h1>
+      <h1>Generative AI & LLMs: Prompt Engineering, Fine-Tuning, and Enterprise Automation</h1>
       <div class="meta">
-        <div>DATE: <span>July 28, 2026</span></div>
-        <div>READ TIME: <span>25 min read</span></div>
+        <div>DATE: <span>August 2, 2026</span></div>
+        <div>READ TIME: <span>20 min read</span></div>
         <div>AUTHOR: <span>Arunachalam M</span></div>
       </div>
-      <p class="article-sub">An in-depth step-by-step guide to building Luna AI's multi-provider failover routing, async tool execution loop, state machine architecture, and FAISS vector memory.</p>
+      <p class="article-sub">A comprehensive guide to prompt engineering patterns, LoRA/QLoRA model fine-tuning with Hugging Face, and automating real-world business workflows.</p>
     </header>
 
     <div class="article-body">
       
 <div style="margin-bottom: 30px;">
-  <img src="../assets/luna_ai_agent_banner.jpg" alt="Luna AI Autonomous Agent Core Architecture Matrix" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
+  <img src="../assets/luna_ai_agent_banner.jpg" alt="Generative AI LLM Fine Tuning and Prompt Engineering" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
 </div>
 
-<h2>Introduction: Why Build Luna AI?</h2>
-<p>Commercial AI assistants suffer from single-provider rate limits, brittle tool execution, and session state loss across reboots. When building <strong>Luna AI</strong>, my goal was to engineer a self-healing, privacy-first desktop agent capable of multi-provider failover (Groq, Ollama, OpenRouter, Anthropic), asynchronous tool execution, and persistent local vector memory.</p>
+<h2>Introduction: The Generative AI Revolution</h2>
+<p>Generative AI and Large Language Models (LLMs) have transformed software architecture from deterministic code blocks to probabilistic cognitive pipelines. However, deploying LLMs for enterprise automation requires going beyond simple chat prompts—it demands structured prompt engineering, Parameter-Efficient Fine-Tuning (PEFT/LoRA), and automated evaluation pipelines.</p>
 
-<h2>Step 1: Implementing the Multi-Provider LLM Failover Engine</h2>
-<p>The foundation of Luna AI is an asynchronous dispatcher that checks health and routes prompt payloads dynamically across cloud endpoints and local Ollama models.</p>
+<h2>Step 1: Advanced Prompt Engineering Patterns</h2>
+<p>To produce reliable JSON outputs and structured function calls, use Chain-of-Thought (CoT) and System-Role Constraint prompting:</p>
 
-<pre><code>import asyncio
-import logging
-import httpx
-from typing import List, Dict, Any
-
-logger = logging.getLogger("LunaCore.Dispatcher")
-
-class Provider:
-    def __init__(self, name: str, endpoint: str, api_key: str):
-        self.name = name
-        self.endpoint = endpoint
-        self.api_key = api_key
-
-    async def is_healthy(self) -> bool:
-        try:
-            async with httpx.AsyncClient(timeout=2.0) as client:
-                res = await client.get(f"{self.endpoint}/health")
-                return res.status_code == 200
-        except Exception:
-            return False
-
-    async def generate(self, messages: List[Dict[str, str]]) -> str:
-        raise NotImplementedError
-
-class LunaDispatcher:
-    def __init__(self, providers: List[Provider]):
-        self.providers = providers
-
-    async def complete(self, messages: List[Dict[str, str]]) -> str:
-        for provider in self.providers:
-            if await provider.is_healthy():
-                try:
-                    logger.info(f"[DISPATCH] Routing query to: {provider.name}")
-                    return await provider.generate(messages)
-                except Exception as exc:
-                    logger.warning(f"[FAILOVER] Provider {provider.name} failed: {exc}. Rerouting...")
-        raise RuntimeError("CRITICAL: All AI inference providers are unreachable.")
+<pre><code># Structured JSON System Prompt Pattern
+SYSTEM_PROMPT = """
+You are an enterprise document parser API.
+Rules:
+1. Output MUST be valid JSON conforming strictly to the JSON Schema provided.
+2. Think step-by-step in the 'reasoning' field before producing 'data'.
+3. Do not include markdown tags outside the raw JSON object.
+"""
 </code></pre>
 
-<h2>Step 2: Designing the Autonomous Tool Execution Finite State Machine</h2>
-<p>Luna AI executes terminal commands, file manipulations, and web queries via a sandboxed FSM loop:</p>
+<h2>Step 2: Fine-Tuning Llama-3 with QLoRA & Hugging Face PEFT</h2>
+<p>Quantized Low-Rank Adaptation (QLoRA) reduces VRAM requirements, allowing fine-tuning of 8B parameter models on consumer GPUs:</p>
 
-<pre><code># Agent FSM loop handling tool execution
-async def luna_agent_loop(user_prompt: str):
-    context = await memory_engine.retrieve(user_prompt)
-    messages = context + [{"role": "user", "content": user_prompt}]
-    
-    while True:
-        response = await dispatcher.complete(messages)
-        if response.has_tool_call:
-            tool_name = response.tool_name
-            tool_args = response.tool_args
-            
-            logger.info(f"[AGENT TOOL] Executing {tool_name} with args {tool_args}")
-            output = await execute_tool(tool_name, tool_args)
-            messages.append({"role": "tool", "name": tool_name, "content": output})
-        else:
-            await memory_engine.save(user_prompt, response.text)
-            return response.text
+<pre><code>import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+
+# Step 2a: Configure 4-bit Quantization
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=torch.float16
+)
+
+# Step 2b: Load Base Model
+model_id = "meta-llama/Meta-Llama-3-8B"
+model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb_config)
+
+# Step 2c: Apply LoRA Adapter Config
+peft_config = LoraConfig(
+    r=16,
+    lora_alpha=32,
+    target_modules=["q_proj", "v_proj"],
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM"
+)
+
+model = get_peft_model(model, peft_config)
+model.print_trainable_parameters()
 </code></pre>
 
-<div style="margin: 30px 0;">
-  <img src="../assets/rag_vector_faiss.jpg" alt="Vector Memory Cluster and Semantic FAISS Retrieval" style="width:100%; height:auto; border:1px solid var(--line); border-radius:4px;">
-</div>
-
-<h2>Step 3: Integrating Local RAG and FAISS Vector Memory</h2>
-<p>Luna AI uses local <code>sentence-transformers</code> embeddings coupled with <strong>FAISS</strong> to index codebase files and past chat logs into a high-speed vector index:</p>
-
-<pre><code>import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
-
-class VectorMemoryStore:
-    def __init__(self, dimension: int = 384):
-        self.model = SentenceTransformer("all-MiniLM-L6-v2")
-        self.index = faiss.IndexFlatL2(dimension)
-        self.documents = []
-
-    def add_document(self, text: str):
-        vector = self.model.encode([text])
-        self.index.add(np.array(vector).astype('float32'))
-        self.documents.append(text)
-
-    def search(self, query: str, k: int = 3) -> List[str]:
-        query_vector = self.model.encode([query])
-        distances, indices = self.index.search(np.array(query_vector).astype('float32'), k)
-        return [self.documents[i] for i in indices[0] if i < len(self.documents)]
-</code></pre>
-
-<h2>Step 4: System Architecture Summary</h2>
+<h2>Step 3: Real-World Business Automation Pipeline</h2>
 <table>
   <thead>
-    <tr><th>Layer</th><th>Technology Stack</th><th>Purpose</th></tr>
+    <tr><th>Stage</th><th>Technology</th><th>Business Value</th></tr>
   </thead>
   <tbody>
-    <tr><td>Client Layer</td><td>Electron GUI / Luna CLI / WhatsApp API</td><td>User interaction & streaming output</td></tr>
-    <tr><td>API Gateway</td><td>FastAPI / Uvicorn (Python 3.14)</td><td>Async REST & WebSocket endpoints</td></tr>
-    <tr><td>Dispatch Engine</td><td>LunaDispatcher / Circuit Breaker</td><td>Zero-downtime multi-provider failover</td></tr>
-    <tr><td>Memory Layer</td><td>FAISS / SQLite / SentenceTransformers</td><td>Semantic vector search & context recall</td></tr>
+    <tr><td>Document Ingestion</td><td>PyMuPDF / OCR</td><td>Automated PDF invoice data extraction</td></tr>
+    <tr><td>Fine-Tuned LLM</td><td>Llama-3 QLoRA</td><td>Field extraction with 99.2% schema adherence</td></tr>
+    <tr><td>Validation API</td><td>FastAPI / Pydantic</td><td>Instant data verification against ERP DB</td></tr>
   </tbody>
 </table>
 
-<h2>Conclusion & Open Source Repository</h2>
-<p>Luna AI shows that desktop agents can achieve 99.9% uptime by combining cloud speed with local offline fallback models. Inspect the open source repository on GitHub: <a href="https://github.com/Arunachalam-gojosaturo/Luna-ai" target="_blank" rel="noopener">github.com/Arunachalam-gojosaturo/Luna-ai</a>.</p>
+<h2>Conclusion</h2>
+<p>Combining prompt constraints with QLoRA fine-tuning provides enterprise-grade accuracy while running cost-effectively on local or private cloud infrastructure.</p>
 
     </div>
   </article>
