@@ -278,6 +278,56 @@ nav{
 .spotlight{border:1px solid var(--line);background:var(--panel);position:relative;overflow:hidden;}
 .spotlight-banner{width:100%;height:auto;display:block;border-bottom:1px solid var(--line);}
 
+
+/* ===== BLOG SECTION ===== */
+.blog-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;}
+@media(max-width:960px){.blog-grid{grid-template-columns:repeat(2, 1fr);}}
+@media(max-width:640px){.blog-grid{grid-template-columns:1fr;}}
+
+.blog-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  padding:26px 24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:all 0.25s ease;
+  position:relative;
+  overflow:hidden;
+}
+.blog-card:hover{
+  border-color:var(--cyan);
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px -10px rgba(0,212,255,0.15);
+}
+.blog-card::before{
+  content:'';
+  position:absolute;top:0;left:0;width:3px;height:0;
+  background:var(--cyan);
+  transition:height 0.3s ease;
+}
+.blog-card:hover::before{height:100%;}
+
+.blog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.blog-tag{font-family:var(--label);font-weight:700;font-size:11.5px;letter-spacing:0.1em;color:var(--amber);background:rgba(255,138,0,0.08);border:1px solid rgba(255,138,0,0.3);padding:3px 8px;text-transform:uppercase;}
+.blog-date{font-family:var(--mono);font-size:11px;color:var(--muted-dim);}
+.blog-title{font-family:var(--disp);font-weight:700;font-size:16.5px;line-height:1.35;margin-bottom:12px;color:var(--text);transition:color 0.2s;}
+.blog-card:hover .blog-title{color:var(--cyan);}
+.blog-excerpt{font-family:var(--body);font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:18px;flex-grow:1;}
+.blog-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--muted-dim);}
+.blog-link{color:var(--cyan);font-weight:700;font-family:var(--label);font-size:14px;display:inline-flex;align-items:center;gap:4px;}
+.blog-link:hover{text-decoration:underline;}
+
+.blog-filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
+.filter-btn{
+  font-family:var(--label);font-weight:700;font-size:13px;letter-spacing:0.06em;
+  padding:7px 15px;background:var(--panel);border:1px solid var(--line);color:var(--muted);
+  cursor:pointer;transition:all 0.2s;text-transform:uppercase;
+}
+.filter-btn:hover, .filter-btn.active{
+  background:rgba(0,212,255,0.1);border-color:var(--cyan);color:var(--cyan);
+}
+
 /* ===== BOTTOM BANNER ===== */
 .bottom-banner-container{padding-top:20px;padding-bottom:80px;}
 .bottom-banner{width:100%;height:auto;display:block;border:1px solid var(--line);box-shadow:0 30px 80px -30px rgba(0,0,0,0.6);transition:border-color 0.25s, box-shadow 0.25s;}
@@ -397,6 +447,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--cyan);outline-offs
       <a href="#skills" data-nav>Skills</a>
       <a href="#arcxos" data-nav>ArcXOS</a>
       <a href="#projects" data-nav>Projects</a>
+      <a href="#blog" data-nav>Blog</a>
       <a href="#experience" data-nav>Experience</a>
     </div>
     <a class="nav-cta" href="#contact">Get in touch</a>
@@ -664,10 +715,242 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--cyan);outline-offs
     </div>
   </section>
 
+  
+  <!-- ================= BLOG / DEVLOGS ================= -->
+  <section id="blog">
+    <div class="wrap">
+      <div class="eyebrow reveal">05 — Cyber Articles &amp; Devlogs</div>
+      <h2 class="section-title reveal">Technical Publications</h2>
+      <p class="section-sub reveal">Deep-dive writeups on Arch Linux engineering, autonomous AI agent architecture, kernel performance tuning, and defensive cybersecurity.</p>
+
+      <div class="blog-filter-bar reveal">
+        <button class="filter-btn active" onclick="filterBlogs('ALL', this)">ALL (15)</button>
+        <button class="filter-btn" onclick="filterBlogs('AI &amp; AGENTS', this)">AI &amp; AGENTS</button>
+        <button class="filter-btn" onclick="filterBlogs('ARCH LINUX', this)">ARCH LINUX</button>
+        <button class="filter-btn" onclick="filterBlogs('CYBERSECURITY', this)">CYBERSECURITY</button>
+        <button class="filter-btn" onclick="filterBlogs('KERNEL &amp; SYSTEMS', this)">KERNEL &amp; SYSTEMS</button>
+      </div>
+
+      <div class="blog-grid reveal">
+
+        <article class="blog-card" data-category="ARCH LINUX">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">ARCH LINUX</span>
+              <span class="blog-date">Aug 1, 2026</span>
+            </div>
+            <h3 class="blog-title">How I Built ArcXOS: Designing a Security-Focused Arch Linux Distro</h3>
+            <p class="blog-excerpt">An architectural breakdown of creating ArcXOS using archiso, custom PKGBUILD repositories, automated system hardening scripts, and dotfile environments.</p>
+          </div>
+          <div class="blog-foot">
+            <span>8 min read</span>
+            <a class="blog-link" href="blogs/building-arcxos-custom-arch-linux-distro.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="AI & AGENTS">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">AI & AGENTS</span>
+              <span class="blog-date">Jul 28, 2026</span>
+            </div>
+            <h3 class="blog-title">Architecture of Luna AI: Designing a Modular, Self-Healing Autonomous Agent</h3>
+            <p class="blog-excerpt">Deep dive into Luna AI's multi-provider failover system, function-calling dispatchers, and state machine architecture built with FastAPI.</p>
+          </div>
+          <div class="blog-foot">
+            <span>10 min read</span>
+            <a class="blog-link" href="blogs/luna-ai-autonomous-agent-architecture.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="KERNEL & SYSTEMS">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">KERNEL & SYSTEMS</span>
+              <span class="blog-date">Jul 24, 2026</span>
+            </div>
+            <h3 class="blog-title">Linux Kernel Tuning for Low-Latency Local LLM Inference & Workloads</h3>
+            <p class="blog-excerpt">Optimizing memory page locking, transparent huge pages (THP), CPU governor profiles, and io_uring for maximum local LLM speed.</p>
+          </div>
+          <div class="blog-foot">
+            <span>7 min read</span>
+            <a class="blog-link" href="blogs/linux-kernel-tuning-low-latency-ai.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="CYBERSECURITY">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">CYBERSECURITY</span>
+              <span class="blog-date">Jul 20, 2026</span>
+            </div>
+            <h3 class="blog-title">Cyberkit Deep Dive: Hardening Arch Linux with a 22-in-1 Bash Engine</h3>
+            <p class="blog-excerpt">Inside Cyberkit—a zero-dependency security audit toolkit engineered for Arch Linux, automating Lynis compliance and rootkit detection.</p>
+          </div>
+          <div class="blog-foot">
+            <span>6 min read</span>
+            <a class="blog-link" href="blogs/cyberkit-22-in-1-arch-security-toolkit.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="CYBERSECURITY">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">CYBERSECURITY</span>
+              <span class="blog-date">Jul 16, 2026</span>
+            </div>
+            <h3 class="blog-title">Building Netwatch: Real-Time Packet Sniffing and Intrusion Detection</h3>
+            <p class="blog-excerpt">Designing a lightweight, low-overhead network anomaly detector in Shell and C, deployed as an AUR package for defensive security.</p>
+          </div>
+          <div class="blog-foot">
+            <span>7 min read</span>
+            <a class="blog-link" href="blogs/building-netwatch-realtime-network-intrusion-monitor.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="AI & AGENTS">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">AI & AGENTS</span>
+              <span class="blog-date">Jul 12, 2026</span>
+            </div>
+            <h3 class="blog-title">Deploying an Autonomous WhatsApp AI Agent with Groq LLM & Voice Notes</h3>
+            <p class="blog-excerpt">How I built a multi-channel WhatsApp AI assistant powered by Groq's high-speed inference engine, Whisper STT, and Telegram control.</p>
+          </div>
+          <div class="blog-foot">
+            <span>9 min read</span>
+            <a class="blog-link" href="blogs/luna-whatsapp-agent-groq-voicenotes-telegram-bot.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="ARCH LINUX">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">ARCH LINUX</span>
+              <span class="blog-date">Jul 8, 2026</span>
+            </div>
+            <h3 class="blog-title">Why Arch Linux is the Ultimate Operating System for AI Engineers in 2026</h3>
+            <p class="blog-excerpt">Why cutting-edge CUDA drivers, bleeding-edge kernels, and direct access to raw C++ AI frameworks make Arch Linux superior for AI infrastructure.</p>
+          </div>
+          <div class="blog-foot">
+            <span>6 min read</span>
+            <a class="blog-link" href="blogs/why-arch-linux-is-the-ultimate-os-for-ai-engineers.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="KERNEL & SYSTEMS">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">KERNEL & SYSTEMS</span>
+              <span class="blog-date">Jul 4, 2026</span>
+            </div>
+            <h3 class="blog-title">Building Luna CLI: Bringing Multi-Provider AI Agents to Node.js & Terminal</h3>
+            <p class="blog-excerpt">Designing an interactive CLI client published to npm and AUR that communicates with background AI microservices via streaming JSON IPC.</p>
+          </div>
+          <div class="blog-foot">
+            <span>5 min read</span>
+            <a class="blog-link" href="blogs/luna-cli-bringing-autonomous-agents-to-terminal.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="KERNEL & SYSTEMS">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">KERNEL & SYSTEMS</span>
+              <span class="blog-date">Jun 29, 2026</span>
+            </div>
+            <h3 class="blog-title">Designing a Zero-Dependency Node.js Backend with Custom WebSockets</h3>
+            <p class="blog-excerpt">Building ARC-Network using native Node.js http and crypto modules without Express or Socket.io—achieving ultra-low memory overhead.</p>
+          </div>
+          <div class="blog-foot">
+            <span>8 min read</span>
+            <a class="blog-link" href="blogs/zero-dependency-node-backend-arc-network.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="CYBERSECURITY">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">CYBERSECURITY</span>
+              <span class="blog-date">Jun 25, 2026</span>
+            </div>
+            <h3 class="blog-title">eBPF vs. Traditional Packet Sniffing: High-Performance Network Security</h3>
+            <p class="blog-excerpt">Comparing eBPF kernel probes with raw socket packet capture for real-time intrusion prevention on Arch Linux.</p>
+          </div>
+          <div class="blog-foot">
+            <span>8 min read</span>
+            <a class="blog-link" href="blogs/ebpf-vs-traditional-packet-sniffing-linux-security.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="AI & AGENTS">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">AI & AGENTS</span>
+              <span class="blog-date">Jun 20, 2026</span>
+            </div>
+            <h3 class="blog-title">Building Multi-Provider LLM Failover Systems: Groq, Ollama & OpenRouter</h3>
+            <p class="blog-excerpt">Engineering resilient AI pipelines with fallback hierarchies, automatic prompt retries, and token cost tracking.</p>
+          </div>
+          <div class="blog-foot">
+            <span>7 min read</span>
+            <a class="blog-link" href="blogs/building-multi-provider-llm-failover-systems.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="CYBERSECURITY">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">CYBERSECURITY</span>
+              <span class="blog-date">Jun 15, 2026</span>
+            </div>
+            <h3 class="blog-title">System Hardening Guide: Securing Your Arch Linux Workstation</h3>
+            <p class="blog-excerpt">Step-by-step guide to kernel self-protection (KSPP), AppArmor profile enforcement, encrypted LUKS partitions, and SSH hardening.</p>
+          </div>
+          <div class="blog-foot">
+            <span>9 min read</span>
+            <a class="blog-link" href="blogs/hardening-arch-linux-for-penetration-testing.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="ARCH LINUX">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">ARCH LINUX</span>
+              <span class="blog-date">Jun 10, 2026</span>
+            </div>
+            <h3 class="blog-title">PKGBUILD Mastery: Lessons from Maintaining Packages in the AUR</h3>
+            <p class="blog-excerpt">A complete guide for Linux developers on writing clean PKGBUILD scripts, handling checksums, and building packages for Arch Linux users.</p>
+          </div>
+          <div class="blog-foot">
+            <span>6 min read</span>
+            <a class="blog-link" href="blogs/aur-package-maintenance-lessons-from-shipping-luna-cli.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="AI & AGENTS">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">AI & AGENTS</span>
+              <span class="blog-date">Jun 5, 2026</span>
+            </div>
+            <h3 class="blog-title">Local RAG with FAISS and pgvector: Fast Contextual Memory for AI</h3>
+            <p class="blog-excerpt">Implementing local semantic memory for desktop AI assistants using sentence-transformers, FAISS indexing, and vector similarity.</p>
+          </div>
+          <div class="blog-foot">
+            <span>8 min read</span>
+            <a class="blog-link" href="blogs/retrieval-augmented-generation-rag-local-vector-db.html">Read Article →</a>
+          </div>
+        </article>
+        <article class="blog-card" data-category="KERNEL & SYSTEMS">
+          <div>
+            <div class="blog-top">
+              <span class="blog-tag">KERNEL & SYSTEMS</span>
+              <span class="blog-date">Jun 1, 2026</span>
+            </div>
+            <h3 class="blog-title">The Future of Autonomous AI Agents: OS-Level Integration and Local Execution</h3>
+            <p class="blog-excerpt">Why the future of AI belongs to privacy-first, OS-integrated autonomous agents running directly on open Linux hardware.</p>
+          </div>
+          <div class="blog-foot">
+            <span>7 min read</span>
+            <a class="blog-link" href="blogs/the-future-of-autonomous-ai-agents-on-linux.html">Read Article →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= EXPERIENCE / EDUCATION ================= -->
   <section id="experience">
     <div class="wrap">
-      <div class="eyebrow reveal">05 — Activity Log</div>
+      <div class="eyebrow reveal">06 — Activity Log</div>
       <h2 class="section-title reveal">Experience &amp; education</h2>
       <p class="section-sub reveal">A running log of where the systems knowledge comes from.</p>
 
@@ -715,7 +998,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--cyan);outline-offs
   <section id="contact">
     <div class="wrap">
       <div class="contact-panel reveal">
-        <div class="contact-eyebrow">06 — Open Channel</div>
+        <div class="contact-eyebrow">07 — Open Channel</div>
         <h2 class="contact-title">Let's build something <span>autonomous</span>.</h2>
         <p class="contact-sub">Open to collaborations, AUR contributions, and interesting AI systems problems. Fastest way in is email.</p>
         <div class="contact-ctas">
@@ -809,6 +1092,24 @@ const barObserver = new IntersectionObserver((entries)=>{
   });
 },{threshold:0.3});
 bars.forEach(el=>barObserver.observe(el));
+
+
+// blog filtering
+function filterBlogs(cat, btn){
+  const buttons = document.querySelectorAll('.filter-btn');
+  buttons.forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.blog-card');
+  cards.forEach(card => {
+    const cardCat = card.getAttribute('data-category');
+    if(cat === 'ALL' || cardCat === cat){
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
 
 // nav active section highlight
 const navLinks = document.querySelectorAll('[data-nav]');
